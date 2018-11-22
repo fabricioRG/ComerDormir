@@ -70,4 +70,11 @@ public class ManejadorConsumo {
         return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
     }
     
+    public List getConsumosByCliente(Date inicio, Date salida, int dpiClient){
+        String consulta = "SELECT CONSUMO.* FROM CONSUMO ALOJAMIENTO WHERE CONSUMO.FECHA < '" + fechaFormat.format(salida) + "' && "
+                + " CONSUMO.FECHA >= '" + fechaFormat.format(inicio) + "' AND ALOJAMIENTO.ID = CONSUMO.ID_ALOJAMIENTO AND "
+                + "ALOJAMIENTO.DPI_CLIENTE = ' " + dpiClient + "' ";
+        return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
+    }
+    
 }

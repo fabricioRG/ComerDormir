@@ -12,6 +12,7 @@ import project.backend.hotel.ManejadorHotel;
 import project.backend.restaurante.ManejadorRestaurante;
 import project.frontend.alojamiento.RegistradorAlojamiento;
 import project.frontend.alojamiento.ReporteAlojamientos;
+import project.frontend.alojamiento.ReporteAlojamientosConsumos;
 import project.frontend.cliente.ModificadorCliente;
 import project.frontend.cliente.RegistradorCliente;
 import project.frontend.cliente.ReporteClientes;
@@ -158,6 +159,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRegAloj = new javax.swing.JMenuItem();
         jMenuItemRepAloj = new javax.swing.JMenuItem();
+        jMenuItem26 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemRegClie = new javax.swing.JMenuItem();
         jMenuItemModClie = new javax.swing.JMenuItem();
@@ -536,6 +538,14 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItemRepAloj);
 
+        jMenuItem26.setText("Alojamientos cliente");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem26);
+
         jMenuRecepcion.add(jMenu3);
 
         jMenu4.setText("Cliente");
@@ -849,6 +859,11 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         añadirComponente(ror);
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        ReporteAlojamientosConsumos rac = new ReporteAlojamientosConsumos();
+        añadirComponente(rac);
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+
     /*Metodo encargado de modificar el color del "menuBar" , asi como colocar el nombre del cliente y 
     su cargo en el hotel*/
     private void setItems() {
@@ -946,6 +961,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem23;
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
+    private javax.swing.JMenuItem jMenuItem26;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
