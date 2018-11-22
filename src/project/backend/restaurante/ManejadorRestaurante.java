@@ -52,8 +52,8 @@ public class ManejadorRestaurante {
         } else {
             if(hotel != null){
                 Restaurante rest = new RestauranteBuilder().nombre(nombre).direccion(direccion).
-                        independiente(0).idHotel(hotel.getId()).build();
-                String accion = "INSERT INTO RESTAURANTE(NOMBRE, DIRECCION, INDEPENDIENTE, ID_HOTEL) VALUES (?,?,?,?)";
+                        independiente(0).idHotel(hotel.getId()).nombreHotel(hotel.getNombre()).build();
+                String accion = "INSERT INTO RESTAURANTE(NOMBRE, DIRECCION, INDEPENDIENTE, ID_HOTEL, NOMBRE_HOTEL) VALUES (?,?,?,?,?)";
                 ManejadorBaseDatos.getInstance().setRestaurante(accion, rest, 1);
             } else {
                 Restaurante rest = new RestauranteBuilder().nombre(nombre).direccion(direccion).

@@ -1,6 +1,7 @@
 package project.backend.empleado;
 
 import comerdormir.frontend.ComerDormirDesktop;
+import java.util.Date;
 import java.util.List;
 import project.backend.basedatos.ManejadorBaseDatos;
 import project.backend.hotel.Hotel;
@@ -57,7 +58,7 @@ public class ManejadorEmpleado {
                 } else if (empleado.getTipo() == 4) {
                     Restaurante restaurante = ManejadorRestaurante.getInstance().getRestauranteByID(empleado.getIdRestaurante());
                     if (restaurante.getEstado() == 0) {
-                        throw new Exception("No es posible ingresar al sistema, pues el hotel no esta disponible");
+                        throw new Exception("No es posible ingresar al sistema, pues el restaurante no esta disponible");
                     }
                     empleado.setNombreRestaurante(restaurante.getNombre());
                     empleado.setDireccionRestaurante(restaurante.getDireccion());
@@ -82,21 +83,42 @@ public class ManejadorEmpleado {
     
     public List getEmpleadosByTipo(String tipo){
         String consulta = "SELECT * FROM EMPLEADO WHERE TIPO = ?";
-        return ManejadorBaseDatos.getInstance().getEmpleados(tipo, consulta, 1);
+        return ManejadorBaseDatos.getInstance().getEmpleados(tipo, null, consulta, 1);
     }
     
     public List getEmpleadosByEstado(int estado){
         String consulta = "SELECT * FROM EMPLEADO WHERE ESTADO = ?";
-        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(estado), consulta, 1);
+        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(estado), null, consulta, 1);
+    }
+    
+    public List getEmpleadosByEstadoAndHotel(int estado, int idHotel){
+        String consulta = "SELECT * FROM EMPLEADO WHERE ESTADO = ? AND ID_HOTEL = ?";
+        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(estado), Integer.toString(idHotel), consulta, 2);
+    }
+    
+    public List getEmpleadosByHotel(int idHotel){
+        String consulta = "SELECT * FROM EMPLEADO WHERE ID_HOTEL = ?";
+        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(idHotel), null, consulta, 1);
+    }
+    
+    public List getEmpleadosByRestaurante(int idRestaurante){
+        String consulta = "SELECT * FROM EMPLEADO WHERE ID_HOTEL = ?";
+        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(idRestaurante), null, consulta, 1);
+    }
+    
+    public List getEmpleadosByHotelAndTipo(int idHotel, String tipo){
+        String consulta = "SELECT * FROM EMPLEADO WHERE ID_HOTEL = ? AND TIPO = ?";
+        return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(idHotel), tipo, consulta, 2);
     }
     
     public List getEmpleados(){
         String consulta = "SELECT * FROM EMPLEADO";
-        return ManejadorBaseDatos.getInstance().getEmpleados(null, consulta, 0);
+        return ManejadorBaseDatos.getInstance().getEmpleados(null, null, consulta, 0);
     }
     
 
-    public void setGerente(String DPI, String nombre, String usuario, String contrasena, Hotel hotel, int opcion) throws Exception {
+    public void setGerente(String DPI, String nombre, String usuario, String contrasena, 
+            String sueldo, Date fecha, Hotel hotel, int tipo, int opcion) throws Exception {
         if (DPI.isEmpty() || nombre.isEmpty() || usuario.isEmpty() || contrasena.isEmpty()) {
             throw new Exception("No es posible realizar la accion, existen campos vacios");
         } else if (DPI.length() != 8) {
@@ -107,6 +129,10 @@ public class ManejadorEmpleado {
             throw new Exception("Usuario no valido");
         } else if (contrasena.length() > 15) {
             throw new Exception("Contraseña no valida");
+        } else if (sueldo.isEmpty() || sueldo.contains("-")) {
+            throw new Exception("Sueldo semana no valido");
+        } else if (fecha == null) {
+            throw new Exception("Fecha de registro no valida");
         } else if (getEmpleadoByDpi(DPI) != null) {
             throw new Exception("DPI no valido, pues ya ha sido registrado");
         } else if (getEmpleadoByUsuario(usuario) != null) {
@@ -114,19 +140,23 @@ public class ManejadorEmpleado {
         } else {
             if (opcion == 1) {
                 Empleado empleado = new EmpleadoBuilder().dpi(Integer.parseInt(DPI)).nombre(nombre).
-                        usuario(usuario).contrasena(contrasena).tipo(1).build();
-                String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, CONTRASENA) VALUES(?,?,?,?,?)";
+                        usuario(usuario).contrasena(contrasena).tipo(tipo).sueldoSemanal(Double.parseDouble(sueldo)).fechaRegistro(fecha).build();
+                String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, CONTRASENA, "
+                        + "SUELDO_SEMANA, FECHA_REGISTRO) VALUES(?,?,?,?,?,?,?)";
                 ManejadorBaseDatos.getInstance().setEmpleado(accion, empleado, 0);
             } else if (opcion == 2) {
                 Empleado empleado = new EmpleadoBuilder().dpi(Integer.parseInt(DPI)).nombre(nombre).
-                        usuario(usuario).contrasena(contrasena).tipo(2).idHotel(hotel.getId()).build();
-                String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, CONTRASENA, ID_HOTEL) VALUES(?,?,?,?,?,?)";
+                        usuario(usuario).contrasena(contrasena).tipo(tipo).idHotel(hotel.getId()).
+                        sueldoSemanal(Double.parseDouble(sueldo)).fechaRegistro(fecha).nombreHotel(hotel.getNombre()).build();
+                String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, "
+                        + "CONTRASENA, SUELDO_SEMANA, FECHA_REGISTRO, ID_HOTEL, NOMBRE_HOTEL) VALUES(?,?,?,?,?,?,?,?,?)";
                 ManejadorBaseDatos.getInstance().setEmpleado(accion, empleado, 1);
             }
         }
     }
     
-    public void setEncargadoRes(String DPI, String nombre, String usuario, String contrasena, Restaurante rest) throws Exception{
+    public void setEncargadoRes(String DPI, String nombre, String usuario, String contrasena,
+            String sueldo, Date fecha, Restaurante rest) throws Exception{
         if (DPI.isEmpty() || nombre.isEmpty() || usuario.isEmpty() || contrasena.isEmpty()) {
             throw new Exception("No es posible realizar la accion, existen campos vacios");
         } else if (DPI.length() != 8) {
@@ -137,14 +167,20 @@ public class ManejadorEmpleado {
             throw new Exception("Usuario no valido");
         } else if (contrasena.length() > 15) {
             throw new Exception("Contraseña no valida");
+        } else if (sueldo.isEmpty() || sueldo.contains("-")) {
+            throw new Exception("Sueldo semana no valido");
+        } else if (fecha == null) {
+            throw new Exception("Fecha de registro no valida");
         } else if (getEmpleadoByDpi(DPI) != null) {
             throw new Exception("DPI no valido, pues ya ha sido registrado");
         } else if (getEmpleadoByUsuario(usuario) != null) {
             throw new Exception("No es posible crear el usuario, pues ya ha sido registrado");
         } else {
             Empleado empleado = new EmpleadoBuilder().dpi(Integer.parseInt(DPI)).nombre(nombre).
-                    usuario(usuario).tipo(4).contrasena(contrasena).idRestaurante(rest.getId()).build();
-            String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, CONTRASENA, ID_RESTAURANTE) VALUES(?,?,?,?,?,?)";
+                    usuario(usuario).tipo(4).contrasena(contrasena).sueldoSemanal(Double.parseDouble(sueldo)).
+                    fechaRegistro(fecha).idRestaurante(rest.getId()).nombreRestaurante(rest.getNombre()).build();
+            String accion = "INSERT INTO EMPLEADO(DPI, NOMBRE, TIPO, USUARIO, "
+                    + "CONTRASENA, SUELDO_SEMANA, FECHA_REGISTRO, ID_RESTAURANTE, NOMBRE_RESTAURANTE) VALUES(?,?,?,?,?,?,?,?,?)";
                 ManejadorBaseDatos.getInstance().setEmpleado(accion, empleado, 2);
         }
     }

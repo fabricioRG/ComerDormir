@@ -156,6 +156,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Calificar Hotel"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonHotelActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonRestaurante">
               <Properties>
@@ -170,6 +173,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Calificar Restaurante"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRestauranteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonHotel1">
               <Properties>

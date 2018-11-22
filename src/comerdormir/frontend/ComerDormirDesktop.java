@@ -7,19 +7,44 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import project.backend.empleado.Empleado;
+import project.backend.hotel.Hotel;
+import project.backend.hotel.ManejadorHotel;
+import project.backend.restaurante.ManejadorRestaurante;
+import project.frontend.alojamiento.RegistradorAlojamiento;
+import project.frontend.alojamiento.ReporteAlojamientos;
+import project.frontend.cliente.ModificadorCliente;
+import project.frontend.cliente.RegistradorCliente;
+import project.frontend.cliente.ReporteClientes;
+import project.frontend.consumo.ReporteConsumos;
+import project.frontend.consumo.TomarPedido;
 import project.frontend.empleado.CreadorEncargadoR;
 import project.frontend.empleado.CreadorGerenteG;
 import project.frontend.empleado.CreadorGerenteH;
+import project.frontend.empleado.CreadorGerenteH2;
+import project.frontend.empleado.CreadorRecepcionista;
+import project.frontend.empleado.CreadorRecepcionista2;
 import project.frontend.empleado.ModificadorEmpleado;
+import project.frontend.empleado.ModificadorEmpleado2;
 import project.frontend.empleado.ReporteEmpleados;
+import project.frontend.empleado.ReporteEmpleados2;
 import project.frontend.hotel.CreadorHotel;
 import project.frontend.empleado.SolicitadorEmpleado;
 import project.frontend.habitacion.CreadorHabitacion;
+import project.frontend.habitacion.HabitacionMasPopular;
 import project.frontend.habitacion.ModificadorHabitacion;
 import project.frontend.habitacion.ReporteHabitaciones;
 import project.frontend.hotel.DesactivarActivarHotel;
 import project.frontend.hotel.ModificadorHotel;
 import project.frontend.hotel.ReporteHotel;
+import project.frontend.menu.CreadorMenu;
+import project.frontend.menu.ModificadorMenu;
+import project.frontend.menu.ReporteMenu;
+import project.frontend.opinion.ReporteOpinionesHotel;
+import project.frontend.opinion.ReporteOpinionesRestaurante;
+import project.frontend.promocion.PromocionHabitacion;
+import project.frontend.reservacion.CanceladorReservacion;
+import project.frontend.reservacion.RegistradorReservacion2;
+import project.frontend.reservacion.ReporteReservacion;
 import project.frontend.restaurante.CreadorRestaurante;
 import project.frontend.restaurante.ModificadorRestaurante;
 import project.frontend.restaurante.ReporteRestaurante;
@@ -39,6 +64,7 @@ import project.frontend.restaurante.ReporteRestaurante;
 public class ComerDormirDesktop extends javax.swing.JFrame {
 
     private Empleado empleado = null;
+    private Hotel hotel = null;
     public static final String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/";
     public static final String IMAGE_EXTENSION = ".jpg";
     public String path = " ";
@@ -50,6 +76,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
      */
     public ComerDormirDesktop(Empleado empleado) {
         this.empleado = empleado;
+        this.hotel = ManejadorHotel.getInstance().getHotelById(this.empleado.getIdHotel());
         setItems();
         initComponents();
         this.setLocationRelativeTo(this);
@@ -97,35 +124,40 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         jMenuItem16 = new javax.swing.JMenuItem();
         jMenuItem17 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         jMenuItem11 = new javax.swing.JMenuItem();
         jMenuItem10 = new javax.swing.JMenuItem();
         jMenuItem13 = new javax.swing.JMenuItem();
+        jMenu14 = new javax.swing.JMenu();
+        jMenuItem24 = new javax.swing.JMenuItem();
+        jMenuItem25 = new javax.swing.JMenuItem();
         jMenuHotel = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCrearUsuario = new javax.swing.JMenuItem();
-        jMenuItemReporte = new javax.swing.JMenuItem();
         jMenuItemModificar = new javax.swing.JMenuItem();
+        jMenuItemReporte = new javax.swing.JMenuItem();
         jMenuItemEliminar = new javax.swing.JMenuItem();
+        jMenuItem20 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItemCrearMenu = new javax.swing.JMenuItem();
         jMenuItemRepMenu = new javax.swing.JMenuItem();
         jMenuItemModMen = new javax.swing.JMenuItem();
-        jMenuItemDeshaMenu = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
-        jMenuItemModPre = new javax.swing.JMenuItem();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
         jMenuRecepcion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItemRegistrar = new javax.swing.JMenuItem();
-        jMenuItemElimRes = new javax.swing.JMenuItem();
         jMenuItemReportReser = new javax.swing.JMenuItem();
+        jMenuItemElimRes = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRegAloj = new javax.swing.JMenuItem();
         jMenuItemRepAloj = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItemAlojHab = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemRegClie = new javax.swing.JMenuItem();
         jMenuItemModClie = new javax.swing.JMenuItem();
@@ -276,6 +308,14 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu13.add(jMenuItem18);
 
+        jMenuItem3.setText("Habitacion mas popular");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu13.add(jMenuItem3);
+
         jMenuGerente.add(jMenu13);
 
         jMenu11.setText("Empleado");
@@ -295,6 +335,14 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             }
         });
         jMenu11.add(jMenuItem9);
+
+        jMenuItem19.setText("Crear Recepcionista");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu11.add(jMenuItem19);
 
         jMenuItem11.setText("Crear Encargado Restaurante");
         jMenuItem11.addActionListener(new java.awt.event.ActionListener() {
@@ -322,6 +370,26 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         jMenuGerente.add(jMenu11);
 
+        jMenu14.setText("Opiniones");
+
+        jMenuItem24.setText("Opiniones Hotel");
+        jMenuItem24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem24ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem24);
+
+        jMenuItem25.setText("Opiniones Restaurante");
+        jMenuItem25.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem25ActionPerformed(evt);
+            }
+        });
+        jMenu14.add(jMenuItem25);
+
+        jMenuGerente.add(jMenu14);
+
         menuBar.add(jMenuGerente);
 
         jMenuHotel.setText("Hotel");
@@ -329,7 +397,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         jMenu1.setText("Empleado");
 
-        jMenuItemCrearUsuario.setText("Crear Usuario");
+        jMenuItemCrearUsuario.setText("Crear Gerente");
         jMenuItemCrearUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemCrearUsuarioActionPerformed(evt);
@@ -337,15 +405,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemCrearUsuario);
 
-        jMenuItemReporte.setText("Reporte Usuarios");
-        jMenuItemReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemReporteActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItemReporte);
-
-        jMenuItemModificar.setText("Modificar Usuario");
+        jMenuItemModificar.setText("Crear Encargado Recepcion");
         jMenuItemModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemModificarActionPerformed(evt);
@@ -353,13 +413,29 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu1.add(jMenuItemModificar);
 
-        jMenuItemEliminar.setText("Eliminar Usuario");
+        jMenuItemReporte.setText("Crear Encargado Restaurante");
+        jMenuItemReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReporteActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemReporte);
+
+        jMenuItemEliminar.setText("Reporte Empleados");
         jMenuItemEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemEliminarActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItemEliminar);
+
+        jMenuItem20.setText("Modificador Empleado");
+        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem20ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem20);
 
         jMenuHotel.add(jMenu1);
 
@@ -389,25 +465,23 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItemModMen);
 
-        jMenuItemDeshaMenu.setText("DesHabilitar Menu");
-        jMenuItemDeshaMenu.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemDeshaMenuActionPerformed(evt);
-            }
-        });
-        jMenu5.add(jMenuItemDeshaMenu);
-
         jMenuHotel.add(jMenu5);
 
-        jMenu6.setText("Habitacion");
+        jMenu6.setText("Promociones");
 
-        jMenuItemModPre.setText("Modificar Precio / Reportes");
-        jMenuItemModPre.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem21.setText("Promocion habitacion");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemModPreActionPerformed(evt);
+                jMenuItem21ActionPerformed(evt);
             }
         });
-        jMenu6.add(jMenuItemModPre);
+        jMenu6.add(jMenuItem21);
+
+        jMenuItem22.setText("Promocion restaurante");
+        jMenu6.add(jMenuItem22);
+
+        jMenuItem23.setText("Promocion cliente");
+        jMenu6.add(jMenuItem23);
 
         jMenuHotel.add(jMenu6);
 
@@ -426,14 +500,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItemRegistrar);
 
-        jMenuItemElimRes.setText("Cancelar Reservacion");
-        jMenuItemElimRes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemElimResActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItemElimRes);
-
         jMenuItemReportReser.setText("Reporte Reservaciones");
         jMenuItemReportReser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -441,6 +507,14 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             }
         });
         jMenu2.add(jMenuItemReportReser);
+
+        jMenuItemElimRes.setText("Cancelar Reservacion");
+        jMenuItemElimRes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemElimResActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItemElimRes);
 
         jMenuRecepcion.add(jMenu2);
 
@@ -461,22 +535,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItemRepAloj);
-
-        jMenuItem3.setText("Reporte Alojamiento Cliente");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem3);
-
-        jMenuItemAlojHab.setText("Reporte Alojamiento Habitacion");
-        jMenuItemAlojHab.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemAlojHabActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItemAlojHab);
 
         jMenuRecepcion.add(jMenu3);
 
@@ -508,7 +566,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         jMenuRecepcion.add(jMenu4);
 
-        jMenu8.setText("Registrar egreso");
+        jMenu8.setText("Check-out");
 
         jMenuItem2.setText("Cobrar monto Total");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -598,112 +656,92 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalirActionPerformed
 
     private void jMenuItemCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearUsuarioActionPerformed
-//        CreadorUsuario cu = new CreadorUsuario(this.DB);
-//        añadirComponente(cu);
+        CreadorGerenteH2 cg = new CreadorGerenteH2(hotel);
+        añadirComponente(cg);
     }//GEN-LAST:event_jMenuItemCrearUsuarioActionPerformed
 
     private void jMenuItemReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporteActionPerformed
-//        ReporteUsuarios ru = new ReporteUsuarios(this.DB);
-//        añadirComponente(ru);
+        CreadorRestaurante cr = new CreadorRestaurante();
+        añadirComponente(cr);
     }//GEN-LAST:event_jMenuItemReporteActionPerformed
 
     private void jMenuItemModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModificarActionPerformed
-//        ModificadorUsuario mu = new ModificadorUsuario(DB);
-//        añadirComponente(mu);
+        CreadorRecepcionista2 cr = new CreadorRecepcionista2(hotel);
+        añadirComponente(cr);
     }//GEN-LAST:event_jMenuItemModificarActionPerformed
 
     private void jMenuItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEliminarActionPerformed
-//        EliminadorUsuario eu = new EliminadorUsuario(DB);
-//        añadirComponente(eu);
+        ReporteEmpleados2 re = new ReporteEmpleados2(hotel);
+        añadirComponente(re);
     }//GEN-LAST:event_jMenuItemEliminarActionPerformed
 
     private void jMenuItemRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistrarActionPerformed
-//        RegistradorReservacion rr = new RegistradorReservacion(DB, usuario);
-//        añadirComponente(rr);
+        RegistradorReservacion2 rr = new RegistradorReservacion2(hotel);
+        añadirComponente(rr);
     }//GEN-LAST:event_jMenuItemRegistrarActionPerformed
 
     private void jMenuItemReportReserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportReserActionPerformed
-//        ReporteReservaciones rr = new ReporteReservaciones(DB, usuario);
-//        añadirComponente(rr);
+        ReporteReservacion rr = new ReporteReservacion(hotel);
+        añadirComponente(rr);
     }//GEN-LAST:event_jMenuItemReportReserActionPerformed
 
     private void jMenuItemElimResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemElimResActionPerformed
-//        CanceladorReservacion cr = new CanceladorReservacion(DB, usuario);
-//        añadirComponente(cr);
+        CanceladorReservacion cr = new CanceladorReservacion(hotel);
+        añadirComponente(cr);
     }//GEN-LAST:event_jMenuItemElimResActionPerformed
 
     private void jMenuItemRegAlojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegAlojActionPerformed
-//        RegistradorAlojamiento ra = new RegistradorAlojamiento(DB, usuario);
-//        añadirComponente(ra);
+        RegistradorAlojamiento ra = new RegistradorAlojamiento(hotel);
+        añadirComponente(ra);
     }//GEN-LAST:event_jMenuItemRegAlojActionPerformed
 
     private void jMenuItemRepClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRepClieActionPerformed
-//        ReporteClientes rc = new ReporteClientes(DB, usuario);
-//        añadirComponente(rc);
+        ReporteClientes rc = new ReporteClientes();
+        añadirComponente(rc);
     }//GEN-LAST:event_jMenuItemRepClieActionPerformed
 
     private void jMenuItemRegClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegClieActionPerformed
-//        RegistradorCliente rc = new RegistradorCliente(DB, usuario);
-//        añadirComponente(rc);
+        RegistradorCliente rc = new RegistradorCliente();
+        añadirComponente(rc);
     }//GEN-LAST:event_jMenuItemRegClieActionPerformed
 
     private void jMenuItemCrearMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCrearMenuActionPerformed
-//        CreadorMenu cm = new CreadorMenu(DB);
-//        añadirComponente(cm);
+        CreadorMenu cm = new CreadorMenu();
+        añadirComponente(cm);
     }//GEN-LAST:event_jMenuItemCrearMenuActionPerformed
 
     private void jMenuItemRepMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRepMenuActionPerformed
-//        ReporteMenu rm = new ReporteMenu(DB);
-//        añadirComponente(rm);
+        ReporteMenu rm = new ReporteMenu();
+        añadirComponente(rm);
     }//GEN-LAST:event_jMenuItemRepMenuActionPerformed
 
     private void jMenuItemModMenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModMenActionPerformed
-//        ModificadorMenu mm = new ModificadorMenu(DB);
-//        añadirComponente(mm);
+        ModificadorMenu mm = new ModificadorMenu();
+        añadirComponente(mm);
     }//GEN-LAST:event_jMenuItemModMenActionPerformed
 
-    private void jMenuItemDeshaMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemDeshaMenuActionPerformed
-//        DeshabilitadorMenu dm = new DeshabilitadorMenu(DB);
-//        añadirComponente(dm);
-    }//GEN-LAST:event_jMenuItemDeshaMenuActionPerformed
-
     private void jMenuItemRepAlojActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRepAlojActionPerformed
-//        ReporteAlojamientos ra = new ReporteAlojamientos(DB, usuario);
-//        añadirComponente(ra);
+        ReporteAlojamientos ra = new ReporteAlojamientos(hotel);
+        añadirComponente(ra);
     }//GEN-LAST:event_jMenuItemRepAlojActionPerformed
 
     private void jMenuItemModClieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModClieActionPerformed
-//        ModificadorCliente mc = new ModificadorCliente(DB, usuario);
-//        añadirComponente(mc);
+        ModificadorCliente mc = new ModificadorCliente();
+        añadirComponente(mc);
     }//GEN-LAST:event_jMenuItemModClieActionPerformed
 
-    private void jMenuItemModPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemModPreActionPerformed
-//        ModificadorPrecio mp = new ModificadorPrecio(DB, usuario);
-//        añadirComponente(mp);
-    }//GEN-LAST:event_jMenuItemModPreActionPerformed
-
     private void jMenuItemTomarPedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTomarPedActionPerformed
-//        TomarPedido tp = new TomarPedido(DB);
-//        añadirComponente(tp);
+        TomarPedido tp = new TomarPedido(ManejadorRestaurante.getInstance().getRestauranteByID(empleado.getIdRestaurante()));
+        añadirComponente(tp);
     }//GEN-LAST:event_jMenuItemTomarPedActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
 
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-//        ReporteAlojamientosCliente rac = new ReporteAlojamientosCliente(DB, usuario);
-//        añadirComponente(rac);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItemAlojHabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemAlojHabActionPerformed
-//        ReporteAlojamientosHabitacion rah = new ReporteAlojamientosHabitacion(DB, usuario);
-//        añadirComponente(rah);
-    }//GEN-LAST:event_jMenuItemAlojHabActionPerformed
-
     private void jMenuItemReporConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporConActionPerformed
-//        ReporteConsumos rc = new ReporteConsumos(DB);
-//        añadirComponente(rc);
+                ReporteConsumos rc = new ReporteConsumos(ManejadorRestaurante.getInstance().getRestauranteByID(empleado.getIdRestaurante()));
+                añadirComponente(rc);
     }//GEN-LAST:event_jMenuItemReporConActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -781,6 +819,36 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         añadirComponente(mh);
     }//GEN-LAST:event_jMenuItem18ActionPerformed
 
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        CreadorRecepcionista cr = new CreadorRecepcionista();
+        añadirComponente(cr);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
+    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
+        ModificadorEmpleado2 me = new ModificadorEmpleado2(empleado, ManejadorHotel.getInstance().getHotelById(empleado.getIdHotel()));
+        añadirComponente(me);
+    }//GEN-LAST:event_jMenuItem20ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        HabitacionMasPopular hmp = new HabitacionMasPopular();
+        añadirComponente(hmp);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
+        PromocionHabitacion ph = new PromocionHabitacion(hotel);
+        añadirComponente(ph);
+    }//GEN-LAST:event_jMenuItem21ActionPerformed
+
+    private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
+        ReporteOpinionesHotel ro = new ReporteOpinionesHotel();
+        añadirComponente(ro);
+    }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem25ActionPerformed
+        ReporteOpinionesRestaurante ror = new ReporteOpinionesRestaurante();
+        añadirComponente(ror);
+    }//GEN-LAST:event_jMenuItem25ActionPerformed
+
     /*Metodo encargado de modificar el color del "menuBar" , asi como colocar el nombre del cliente y 
     su cargo en el hotel*/
     private void setItems() {
@@ -795,8 +863,8 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             tipoImagen1 = 2;
             tipoUsuario = "Gerente Hotel: ";
         } else if (empleado.getTipo() == 3) {
-            tipoImagen = 3;
-            tipoImagen1 = 4;
+            tipoImagen = 4;
+            tipoImagen1 = 3;
             tipoUsuario = "Recepcionista: ";
         } else {
             tipoImagen = 5;
@@ -827,7 +895,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         } else if (empleado.getTipo() == 2) {
             jMenuHotel.setVisible(true);
             this.labelInformacion.setText("HOTEL \"" + empleado.getNombreHotel() + "\"");
-        } else if(empleado.getTipo() == 3) {
+        } else if (empleado.getTipo() == 3) {
             jMenuRecepcion.setVisible(true);
             this.labelInformacion.setText("RECEPCION \"" + empleado.getNombreHotel() + "\"");
         } else {
@@ -849,6 +917,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu11;
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
+    private javax.swing.JMenu jMenu14;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -869,7 +938,14 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem20;
+    private javax.swing.JMenuItem jMenuItem21;
+    private javax.swing.JMenuItem jMenuItem22;
+    private javax.swing.JMenuItem jMenuItem23;
+    private javax.swing.JMenuItem jMenuItem24;
+    private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
@@ -877,16 +953,13 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JMenuItem jMenuItemAlojHab;
     private javax.swing.JMenuItem jMenuItemCambiar;
     private javax.swing.JMenuItem jMenuItemCrearMenu;
     private javax.swing.JMenuItem jMenuItemCrearUsuario;
-    private javax.swing.JMenuItem jMenuItemDeshaMenu;
     private javax.swing.JMenuItem jMenuItemElimRes;
     private javax.swing.JMenuItem jMenuItemEliminar;
     private javax.swing.JMenuItem jMenuItemModClie;
     private javax.swing.JMenuItem jMenuItemModMen;
-    private javax.swing.JMenuItem jMenuItemModPre;
     private javax.swing.JMenuItem jMenuItemModificar;
     private javax.swing.JMenuItem jMenuItemRegAloj;
     private javax.swing.JMenuItem jMenuItemRegClie;

@@ -1,5 +1,7 @@
 package project.backend.empleado;
 
+import java.util.Date;
+
 /**
  *
  * @author fabricio
@@ -11,7 +13,9 @@ public class EmpleadoBuilder {
     private String usuario;
     private int tipo;
     private int estado;
+    private double sueldoSemanal;
     private String contrasena;
+    private Date fechaRegistro;
     private String nombreHotel;
     private String direccionHotel;
     private int idHotel;
@@ -34,6 +38,16 @@ public class EmpleadoBuilder {
     
     public EmpleadoBuilder usuario(String usuario){
         this.usuario = usuario;
+        return this;
+    }
+    
+    public EmpleadoBuilder sueldoSemanal(double sueldoSemanal){
+        this.sueldoSemanal = sueldoSemanal;
+        return this;
+    }
+    
+    public EmpleadoBuilder fechaRegistro(Date fechaRegistro){
+        this.fechaRegistro = fechaRegistro;
         return this;
     }
     
@@ -90,6 +104,14 @@ public class EmpleadoBuilder {
     
     public int getDpi(){
         return dpi;
+    }
+
+    public double getSueldoSemanal() {
+        return sueldoSemanal;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
     }
     
     public String getNombre(){

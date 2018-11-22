@@ -25,8 +25,9 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
     private List<Habitacion> listaHabit = null;
     private ObservableList<Habitacion> listaHabitObser = null;
     public String path;
+    private Habitacion habitacion;
     private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
-    
+
     /**
      * Creates new form CreadorUsuario
      */
@@ -68,6 +69,7 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
         buttonActualizar1 = new javax.swing.JButton();
         textFieldTipo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        buttonActualizar2 = new javax.swing.JButton();
 
         jTextField7.setBackground(new java.awt.Color(254, 254, 254));
         jTextField7.setForeground(new java.awt.Color(1, 1, 1));
@@ -102,23 +104,30 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${id}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idHotel}"));
-        columnBinding.setColumnName("Id Hotel");
-        columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${numero}"));
         columnBinding.setColumnName("Numero");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipo}"));
+        columnBinding.setColumnName("Tipo");
+        columnBinding.setColumnClass(String.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precio}"));
         columnBinding.setColumnName("Precio");
         columnBinding.setColumnClass(Double.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${costoMantenimiento}"));
-        columnBinding.setColumnName("Costo Mantenimiento");
+        columnBinding.setColumnName("Mantenimiento");
         columnBinding.setColumnClass(Double.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${tipo}"));
-        columnBinding.setColumnName("Tipo");
-        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idHotel}"));
+        columnBinding.setColumnName("Id Hotel");
+        columnBinding.setColumnClass(Integer.class);
         bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
+        jTableBinding.bind();org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, this, org.jdesktop.beansbinding.ELProperty.create("${habitacion}"), jTable1, org.jdesktop.beansbinding.BeanProperty.create("selectedElement"));
+        bindingGroup.addBinding(binding);
+
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         buttonActualizar.setBackground(new java.awt.Color(246, 145, 1));
@@ -150,6 +159,16 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
         jLabel2.setForeground(new java.awt.Color(139, 71, 33));
         jLabel2.setText("Tipo:");
 
+        buttonActualizar2.setBackground(new java.awt.Color(246, 145, 1));
+        buttonActualizar2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonActualizar2.setForeground(new java.awt.Color(254, 254, 254));
+        buttonActualizar2.setText("Filtrar por Hotel");
+        buttonActualizar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActualizar2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,18 +184,20 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(buttonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(85, 85, 85)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(buttonActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(textFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -187,11 +208,12 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
                 .addGap(16, 16, 16)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonActualizar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(textFieldTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2)))
+                        .addComponent(jLabel2))
+                    .addComponent(buttonActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -227,17 +249,38 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
         actualizarByTipo(textFieldTipo.getText().trim());
     }//GEN-LAST:event_buttonActualizar1ActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        textFieldTipo.setText(habitacion.getTipo());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void buttonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizar2ActionPerformed
+        SelectHotel sh = new SelectHotel(null, closable);
+        sh.setVisible(true);
+        if (sh.getHotelSeleccionado() != null) {
+            actualizarListaByHotel(sh.getHotelSeleccionado());
+        }
+    }//GEN-LAST:event_buttonActualizar2ActionPerformed
+
     private void actualizarLista() {
         listaHabitObser.clear();
-        if(ManejadorHabitacion.getInstance().getHabitaciones() != null){
+        if (ManejadorHabitacion.getInstance().getHabitaciones() != null) {
             listaHabitObser.addAll(ManejadorHabitacion.getInstance().getHabitaciones());
         }
     }
-    
-    private void actualizarByTipo(String tipo){
+
+    private void actualizarByTipo(String tipo) {
         listaHabitObser.clear();
-        if(ManejadorHabitacion.getInstance().getHabitacionesByTipo(tipo) != null){
+        if (ManejadorHabitacion.getInstance().getHabitacionesByTipo(tipo) != null) {
             listaHabitObser.addAll(ManejadorHabitacion.getInstance().getHabitacionesByTipo(tipo));
+        }
+    }
+
+    private void actualizarListaByHotel(Hotel hotel) {
+        if (hotel != null) {
+            listaHabitObser.clear();
+            if (ManejadorHabitacion.getInstance().getHabitacionesByIdHotel(hotel.getId()) != null) {
+                listaHabitObser.addAll(ManejadorHabitacion.getInstance().getHabitacionesByIdHotel(hotel.getId()));
+            }
         }
     }
 
@@ -249,11 +292,19 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
         this.listaHabitObser = listaHabitObser;
     }
 
-    
+    public Habitacion getHabitacion() {
+        return habitacion;
+    }
+
+    public void setHabitacion(Habitacion habitacion) {
+        this.habitacion = habitacion;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonActualizar;
     private javax.swing.JButton buttonActualizar1;
+    private javax.swing.JButton buttonActualizar2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

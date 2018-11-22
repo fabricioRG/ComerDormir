@@ -5,6 +5,8 @@
  */
 package project.backend.habitacion;
 
+import java.util.Date;
+
 /**
  *
  * @author fabricio
@@ -19,6 +21,7 @@ public class Habitacion {
     private String tipo;
     private int nivel;
     private double precio;
+    private Date fechaRegistro;
     private double costoMantenimiento;
     
     private Habitacion(){
@@ -35,7 +38,7 @@ public class Habitacion {
         this.nivel = builder.getNivel();
         this.precio = builder.getPrecio();
         this.costoMantenimiento = builder.getCostoMantenimiento();
-        
+        this.fechaRegistro = builder.getFechaRegistro();
     }
 
     public int getId() {
@@ -60,6 +63,14 @@ public class Habitacion {
 
     public void setNombreHotel(String nombreHotel) {
         this.nombreHotel = nombreHotel;
+    }
+
+    public Date getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    public void setFechaRegistro(Date fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
     }
 
     public String getDireccionHotel() {

@@ -12,6 +12,8 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import project.frontend.empleado.SolicitadorEmpleado;
 import project.frontend.hotel.ReporteHotel;
+import project.frontend.opinion.CreadorOpinionHotel;
+import project.frontend.opinion.CreadorOpinionRestaurante;
 import project.frontend.reservacion.RegistradorReservacion;
 
 /**
@@ -84,11 +86,21 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButtonHotel.setFont(new java.awt.Font("Caviar Dreams", 0, 18)); // NOI18N
         jButtonHotel.setForeground(new java.awt.Color(1, 27, 111));
         jButtonHotel.setText("Calificar Hotel");
+        jButtonHotel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonHotelActionPerformed(evt);
+            }
+        });
 
         jButtonRestaurante.setBackground(new java.awt.Color(254, 254, 254));
         jButtonRestaurante.setFont(new java.awt.Font("Caviar Dreams", 0, 18)); // NOI18N
         jButtonRestaurante.setForeground(new java.awt.Color(1, 27, 111));
         jButtonRestaurante.setText("Calificar Restaurante");
+        jButtonRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRestauranteActionPerformed(evt);
+            }
+        });
 
         jButtonHotel1.setBackground(new java.awt.Color(254, 254, 254));
         jButtonHotel1.setFont(new java.awt.Font("Caviar Dreams", 0, 18)); // NOI18N
@@ -207,6 +219,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
         ReporteHotel rh = new ReporteHotel();
         añadirComponente(rh);
     }//GEN-LAST:event_jButtonHotel1ActionPerformed
+
+    private void jButtonHotelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHotelActionPerformed
+        CreadorOpinionHotel coh = new CreadorOpinionHotel();
+        añadirComponente(coh);
+    }//GEN-LAST:event_jButtonHotelActionPerformed
+
+    private void jButtonRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRestauranteActionPerformed
+        CreadorOpinionRestaurante cor = new CreadorOpinionRestaurante();
+        añadirComponente(cor);
+    }//GEN-LAST:event_jButtonRestauranteActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane PrincipalDesktop;

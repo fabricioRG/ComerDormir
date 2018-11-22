@@ -156,6 +156,9 @@
                   <Subbinding sourcePath="${independiente}">
                     <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
                   </Subbinding>
+                  <Subbinding sourcePath="${nombreHotel}">
+                    <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                  </Subbinding>
                 </BindingProperty>
                 <BindingProperty name="selectedElement" source="Form" sourcePath="${restauSeleccionado}" target="jTable1" targetPath="selectedElement" updateStrategy="0" immediately="false">
                   <BindingParameter name="IGNORE_ADJUSTING" value="N"/>

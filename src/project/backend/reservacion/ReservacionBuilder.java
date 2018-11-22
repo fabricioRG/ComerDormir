@@ -16,6 +16,7 @@ public class ReservacionBuilder {
     private int dpiCliente;
     private String nombreCliente;
     private String nombreHotel;
+    private int idHotel;
     private Date fechaInicio;
     private Date fechaSalida;
     private int estado;
@@ -39,6 +40,11 @@ public class ReservacionBuilder {
     }
     public ReservacionBuilder precioHabitacion(double precioHabitacion){
         this.precioHabitacion = precioHabitacion;
+        return this;
+    }
+    
+    public ReservacionBuilder idHotel(int idHotel){
+        this.idHotel = idHotel;
         return this;
     }
     
@@ -98,6 +104,10 @@ public class ReservacionBuilder {
 
     public double getPrecioHabitacion() {
         return precioHabitacion;
+    }
+
+    public int getIdHotel() {
+        return idHotel;
     }
 
     public int getDpiCliente() {

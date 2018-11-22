@@ -33,22 +33,22 @@ public class ManejadorHabitacion {
     }
 
     public List getHabitacionByIdHotelAndNumero(Habitacion habitacion) {
-        String consulta = "SELECT * FROM HABITACION WHERE ID_HOTEL = ? AND NUMERO = ?";
+        String consulta = "SELECT * FROM HABITACION WHERE ID_HOTEL = ? AND NUMERO = ? ORDER BY NUMERO";
         return ManejadorBaseDatos.getInstance().getHabitacionesByIdHotelAnd(consulta, habitacion);
     }
 
     public List getHabitaciones() {
-        String consulta = "SELECT * FROM HABITACION";
+        String consulta = "SELECT * FROM HABITACION ORDER BY NUMERO";
         return ManejadorBaseDatos.getInstance().getHabitaciones(consulta, null, 0);
     }
 
     public List getHabitacionesByTipo(String tipo) {
-        String consulta = "SELECT * FROM HABITACION WHERE TIPO = ?";
+        String consulta = "SELECT * FROM HABITACION WHERE TIPO = ? ORDER BY NUMERO";
         return ManejadorBaseDatos.getInstance().getHabitaciones(consulta, tipo, 1);
     }
 
     public List getHabitacionesByIdHotel(int idHotel) {
-        String consulta = "SELECT * FROM HABITACIONES WHERE ID_HOTEL = ?";
+        String consulta = "SELECT * FROM HABITACION WHERE ID_HOTEL = ? ORDER BY NUMERO";
         return ManejadorBaseDatos.getInstance().getHabitaciones(consulta, Integer.toString(idHotel), 1);
     }
 
@@ -90,4 +90,22 @@ public class ManejadorHabitacion {
         return ManejadorBaseDatos.getInstance().getHabitaciones(consulta, Integer.toString(hotel.getId()), 1);
     }
 
+    public Habitacion getHabitacionPopular() {
+        String consulta = "SELECT ID_HABITACION, COUNT(ID_HABITACION) FROM ALOJAMIENTO, RESERVACION WHERE "
+                + "ALOJAMIENTO.ID_RESERVACION = RESERVACION.ID GROUP BY ID_HABITACION ORDER BY COUNT(ID_HABITACION)";
+        return ManejadorBaseDatos.getInstance().getHabitacionPopular(consulta);
+    }
+    
+    public Habitacion getHabitacionByID(int id) {
+        String consulta = "SELECT NUMERO, ID_HOTEL FROM HABITACION WHERE ID = '" + id + "'";
+        return ManejadorBaseDatos.getInstance().getHabitacionNumero(consulta);
+    }
+    
+    public Habitacion getHabitacionPopular(Hotel hotel) {
+        String consulta = "SELECT ID_HABITACION, COUNT(ID_HABITACION) FROM ALOJAMIENTO, RESERVACION WHERE "
+                + "ALOJAMIENTO.ID_RESERVACION = RESERVACION.ID AND RESERVACION.ID_HOTEL = '" + hotel.getId() + "' GROUP BY "
+                + "ID_HABITACION ORDER BY COUNT(ID_HABITACION)";
+        return ManejadorBaseDatos.getInstance().getHabitacionPopular(consulta);
+    }
+    
 }

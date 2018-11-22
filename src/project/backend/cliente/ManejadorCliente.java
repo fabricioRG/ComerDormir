@@ -46,6 +46,11 @@ public class ManejadorCliente {
         return ManejadorBaseDatos.getInstance().getCliente(consulta, nombre, 1);
     }
     
+    public List getClientesByDPI(String dpi){
+        String consulta = "SELECT * FROM CLIENTE WHERE DPI = ?";
+        return ManejadorBaseDatos.getInstance().getCliente(consulta, dpi, 1);
+    }
+    
     public Cliente getClienteByDPI(String dpi){
         String consulta = "SELECT * FROM CLIENTE WHERE DPI = ?";
         return ManejadorBaseDatos.getInstance().getCliente(consulta, dpi);
@@ -64,6 +69,20 @@ public class ManejadorCliente {
                     direccion(direccion).telefono(Integer.parseInt(telefono)).build();
             ManejadorBaseDatos.getInstance().setCliente(accion, cliente);
             JOptionPane.showMessageDialog(null, "Se ha creado exitosamente el cliente '" + nombre + "'", "Accion exitosa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void updateCliente(Cliente cliente, String nombre, String telefono) throws Exception{
+        if(nombre.isEmpty() || telefono.isEmpty()){
+            throw new Exception("Hay datos sin llenar, intentelo de nuevo");
+        } else if(nombre.length() > 40 ){
+            throw new Exception("Ha superado el maximo de caracteres validos (20)");
+        } else {
+            cliente.setNombre(nombre);
+            cliente.setTelefono(Integer.parseInt(telefono));
+            String accion = "UPDATE CLIENTE SET NOMBRE = ?, TELEFONO = ? WHERE DPI = ?";
+            JOptionPane.showMessageDialog(null, "Se ha Modificado exitosamente el cliente'" + nombre + "'", "Accion exitosa", JOptionPane.INFORMATION_MESSAGE);
+            ManejadorBaseDatos.getInstance().updateCliente(accion, cliente);
         }
     }
     

@@ -16,6 +16,7 @@ public class Reservacion {
     private int dpiCliente;
     private String nombreCliente;
     private String nombreHotel;
+    private int idHotel;
     private Date fechaInicio;
     private Date fechaSalida;
     private int estado;
@@ -36,6 +37,7 @@ public class Reservacion {
         this.estado = builder.getEstado();
         this.costoMantenimiento = builder.getCostoMantenimiento();
         this.confirmado = builder.getConfirmado();
+        this.idHotel = builder.getIdHotel();
     }
 
     public int getId() {
@@ -48,6 +50,14 @@ public class Reservacion {
 
     public int getIdHabitacion() {
         return idHabitacion;
+    }
+
+    public int getIdHotel() {
+        return idHotel;
+    }
+
+    public void setIdHotel(int idHotel) {
+        this.idHotel = idHotel;
     }
 
     public void setIdHabitacion(int idHabitacion) {

@@ -182,10 +182,8 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="formattedTextFieldCosto" min="-2" pref="199" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <Component id="formattedTextFieldCosto" min="-2" pref="199" max="-2" attributes="0"/>
                               <Component id="textFieldHotel" min="-2" pref="199" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>

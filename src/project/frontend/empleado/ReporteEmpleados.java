@@ -14,6 +14,10 @@ import project.backend.empleado.ManejadorEmpleado;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import project.backend.hotel.Hotel;
+import project.backend.restaurante.Restaurante;
+import project.frontend.hotel.SelectHotel;
+import project.frontend.restaurante.SelectRestaurante;
 
 /**
  *
@@ -23,9 +27,11 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
 
     private List<Empleado> listaEmp = null;
     private ObservableList<Empleado> listaEmpleadoObser = null;
+    private Hotel hotel;
+    private Restaurante restaurante;
     public String path;
     private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
-    
+
     /**
      * Creates new form CreadorUsuario
      */
@@ -34,7 +40,7 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
         this.listaEmpleadoObser = ObservableCollections.observableList(listaEmp);
         this.path = BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH;
         initComponents();
-        actualizarLista();
+        actualizarLista(1);
     }
 
     /**
@@ -60,13 +66,16 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
 
         };
         comboBoxTipo = new javax.swing.JComboBox<>();
-        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         buttonFiltrar = new javax.swing.JButton();
         buttonActualizar = new javax.swing.JButton();
+        textFieldHotel = new javax.swing.JTextField();
+        buttonSelect = new javax.swing.JButton();
+        textFieldHotel1 = new javax.swing.JTextField();
+        buttonSelect3 = new javax.swing.JButton();
 
         jTextField7.setBackground(new java.awt.Color(254, 254, 254));
         jTextField7.setForeground(new java.awt.Color(1, 1, 1));
@@ -94,9 +103,6 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
         comboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1. Gerente General", "2. Gerente de Hotel", "3. Encargado de Recepcion", "4. Encargado de restaurante" }));
         comboBoxTipo.setToolTipText("Seleccione una opcion");
 
-        jLabel5.setForeground(new java.awt.Color(254, 254, 254));
-        jLabel5.setText("Tipo:");
-
         jLabel1.setFont(new java.awt.Font("Caviar Dreams", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 254, 254));
         jLabel1.setText("Reporte de Empleados");
@@ -118,8 +124,14 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${estado}"));
         columnBinding.setColumnName("Estado");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${usuario}"));
-        columnBinding.setColumnName("Usuario");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${sueldoSemanal}"));
+        columnBinding.setColumnName("Sueldo Semanal");
+        columnBinding.setColumnClass(Double.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nombreHotel}"));
+        columnBinding.setColumnName("Hotel");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nombreRestaurante}"));
+        columnBinding.setColumnName("Restaurante");
         columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
@@ -128,7 +140,7 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
         buttonFiltrar.setBackground(new java.awt.Color(246, 145, 1));
         buttonFiltrar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         buttonFiltrar.setForeground(new java.awt.Color(254, 254, 254));
-        buttonFiltrar.setText("Filtrar");
+        buttonFiltrar.setText("Filtrar por Tipo");
         buttonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonFiltrarActionPerformed(evt);
@@ -145,48 +157,95 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
             }
         });
 
+        textFieldHotel.setBackground(new java.awt.Color(254, 254, 254));
+        textFieldHotel.setForeground(new java.awt.Color(139, 71, 33));
+        textFieldHotel.setText("Sin Seleccionar");
+        textFieldHotel.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        textFieldHotel.setCaretColor(new java.awt.Color(139, 71, 33));
+        textFieldHotel.setMargin(new java.awt.Insets(5, 5, 5, 5));
+
+        buttonSelect.setBackground(new java.awt.Color(246, 145, 1));
+        buttonSelect.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonSelect.setForeground(new java.awt.Color(254, 254, 254));
+        buttonSelect.setText("Filtrar por Hotel");
+        buttonSelect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelectActionPerformed(evt);
+            }
+        });
+
+        textFieldHotel1.setBackground(new java.awt.Color(254, 254, 254));
+        textFieldHotel1.setForeground(new java.awt.Color(139, 71, 33));
+        textFieldHotel1.setText("Sin Seleccionar");
+        textFieldHotel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
+        textFieldHotel1.setCaretColor(new java.awt.Color(139, 71, 33));
+        textFieldHotel1.setMargin(new java.awt.Insets(5, 5, 5, 5));
+
+        buttonSelect3.setBackground(new java.awt.Color(246, 145, 1));
+        buttonSelect3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonSelect3.setForeground(new java.awt.Color(254, 254, 254));
+        buttonSelect3.setText("Filtrar por Restaurante");
+        buttonSelect3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonSelect3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(buttonFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(242, 242, 242)
+                        .addGap(364, 364, 364)
                         .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel1)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                        .addGap(89, 89, 89)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buttonSelect, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textFieldHotel, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(textFieldHotel1)
+                            .addComponent(buttonSelect3, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
+                        .addGap(87, 87, 87)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonFiltrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(221, 221, 221))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonSelect)
+                    .addComponent(buttonFiltrar)
+                    .addComponent(buttonSelect3))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(buttonFiltrar))
-                .addGap(12, 12, 12)
+                    .addComponent(textFieldHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textFieldHotel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,7 +258,7 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,25 +271,56 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonFiltrarActionPerformed
-        filtrarLista();
+        actualizarLista(3);
     }//GEN-LAST:event_buttonFiltrarActionPerformed
 
     private void buttonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizarActionPerformed
-        actualizarLista();
+        actualizarLista(1);
     }//GEN-LAST:event_buttonActualizarActionPerformed
 
-    private void actualizarLista() {
-        listaEmpleadoObser.clear();
-        if(ManejadorEmpleado.getInstance().getEmpleados() != null){
-            listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleados());
+    private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
+        SelectHotel sh = new SelectHotel(null, closable);
+        sh.setVisible(true);
+        if (sh.getHotelSeleccionado() != null) {
+            setHotel(sh.getHotelSeleccionado());
+            textFieldHotel.setText(hotel.getNombre());
+            actualizarLista(2);
+        } else {
+            textFieldHotel.setText("Sin Seleccionar");
         }
-    }
-    
-    private void filtrarLista(){
+    }//GEN-LAST:event_buttonSelectActionPerformed
+
+    private void buttonSelect3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelect3ActionPerformed
+        SelectRestaurante sr = new SelectRestaurante(null, closable);
+        sr.setVisible(true);
+        if (sr.getRestauSeleccionado() != null) {
+            setRestaurante(sr.getRestauSeleccionado());
+            textFieldHotel.setText(restaurante.getNombre());
+            actualizarLista(4);
+        } else {
+            textFieldHotel.setText("Sin Seleccionar");
+        }
+    }//GEN-LAST:event_buttonSelect3ActionPerformed
+
+    private void actualizarLista(int opcion) {
         listaEmpleadoObser.clear();
-        String tipo = comboBoxTipo.getSelectedItem().toString();
-        if(ManejadorEmpleado.getInstance().getEmpleadosByTipo(Character.toString(tipo.charAt(0))) != null){
-            listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleadosByTipo(Character.toString(tipo.charAt(0))));
+        if (opcion == 1) {
+            if (ManejadorEmpleado.getInstance().getEmpleados() != null) {
+                listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleados());
+            }
+        } else if (opcion == 2) {
+            if (ManejadorEmpleado.getInstance().getEmpleadosByHotel(hotel.getId()) != null) {
+                listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleadosByHotel(hotel.getId()));
+            }
+        } else if (opcion == 3) {
+            String tipo = comboBoxTipo.getSelectedItem().toString();
+            if (ManejadorEmpleado.getInstance().getEmpleadosByTipo(tipo) != null) {
+                listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleadosByTipo(Character.toString(tipo.charAt(0))));
+            }
+        } else if (opcion == 4) {
+            if (ManejadorEmpleado.getInstance().getEmpleadosByRestaurante(restaurante.getId()) != null) {
+                listaEmpleadoObser.addAll(ManejadorEmpleado.getInstance().getEmpleadosByRestaurante(restaurante.getId()));
+            }
         }
     }
 
@@ -241,22 +331,42 @@ public class ReporteEmpleados extends javax.swing.JInternalFrame {
     public void setListaEmpleadoObser(ObservableList<Empleado> listaEmpleadoObser) {
         this.listaEmpleadoObser = listaEmpleadoObser;
     }
-    
-    
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public Restaurante getRestaurante() {
+        return restaurante;
+    }
+
+    public void setRestaurante(Restaurante restaurante) {
+        this.restaurante = restaurante;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonActualizar;
     private javax.swing.JButton buttonFiltrar;
+    private javax.swing.JButton buttonSelect;
+    private javax.swing.JButton buttonSelect1;
+    private javax.swing.JButton buttonSelect2;
+    private javax.swing.JButton buttonSelect3;
     private javax.swing.JComboBox<String> comboBoxTipo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField textFieldHotel;
+    private javax.swing.JTextField textFieldHotel1;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
