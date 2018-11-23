@@ -28,7 +28,7 @@ import project.frontend.hotel.SelectHotel;
  *
  * @author fabricio
  */
-public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
+public class ReporteAlojamientosFiltrado extends javax.swing.JInternalFrame {
 
     private List<Alojamiento> listaAloj = null;
     private List<Consumo> listaConsu = null;
@@ -36,6 +36,7 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
     private ObservableList<Consumo> listaConsumosObser = null;
     public String path;
     private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String SIN_SELECCIONAR = "Sin Seleccionar";
     private Hotel hotel;
     private Cliente cliente;
     private Alojamiento alojamientoSelect = null;
@@ -43,7 +44,7 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
     /**
      * Creates new form CreadorUsuario
      */
-    public ReporteAlojamientosConsumos() {
+    public ReporteAlojamientosFiltrado() {
         this.listaAloj = new LinkedList<>();
         this.listaConsu = new LinkedList<>();
         this.listaAlojamientosObser = ObservableCollections.observableList(listaAloj);
@@ -87,6 +88,10 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
         buttonSelect = new javax.swing.JButton();
         textFieldHotel = new javax.swing.JTextField();
         textFieldCliente = new javax.swing.JTextField();
+        buttonActualizar1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelCantidad = new javax.swing.JLabel();
+        buttonActualizar3 = new javax.swing.JButton();
 
         jTextField7.setBackground(new java.awt.Color(254, 254, 254));
         jTextField7.setForeground(new java.awt.Color(1, 1, 1));
@@ -148,7 +153,7 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
         buttonActualizar.setBackground(new java.awt.Color(246, 145, 1));
         buttonActualizar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         buttonActualizar.setForeground(new java.awt.Color(254, 254, 254));
-        buttonActualizar.setText("Mostrar");
+        buttonActualizar.setText("Filtrar");
         buttonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonActualizarActionPerformed(evt);
@@ -161,7 +166,7 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
         jLabel7.setForeground(new java.awt.Color(254, 254, 254));
         jLabel7.setText("Fecha de Inicio*:");
 
-        buttonActualizar2.setBackground(new java.awt.Color(70, 130, 180));
+        buttonActualizar2.setBackground(new java.awt.Color(246, 145, 1));
         buttonActualizar2.setFont(new java.awt.Font("Caviar Dreams", 0, 18)); // NOI18N
         buttonActualizar2.setForeground(new java.awt.Color(254, 254, 254));
         buttonActualizar2.setText("Seleccionar Cliente");
@@ -195,6 +200,34 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
         textFieldCliente.setCaretColor(new java.awt.Color(139, 71, 33));
         textFieldCliente.setMargin(new java.awt.Insets(5, 5, 5, 5));
 
+        buttonActualizar1.setBackground(new java.awt.Color(246, 145, 1));
+        buttonActualizar1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonActualizar1.setForeground(new java.awt.Color(254, 254, 254));
+        buttonActualizar1.setText("Mostrar Todos");
+        buttonActualizar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActualizar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Open Sans", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(254, 254, 254));
+        jLabel2.setText("Cantidad:");
+
+        jLabelCantidad.setFont(new java.awt.Font("Open Sans", 0, 24)); // NOI18N
+        jLabelCantidad.setForeground(new java.awt.Color(254, 254, 254));
+        jLabelCantidad.setText(" ");
+
+        buttonActualizar3.setBackground(new java.awt.Color(246, 145, 1));
+        buttonActualizar3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonActualizar3.setForeground(new java.awt.Color(254, 254, 254));
+        buttonActualizar3.setText("Filtrar por Cliente");
+        buttonActualizar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonActualizar3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -202,36 +235,46 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(textFieldHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(37, 37, 37)
-                                .addComponent(textFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 925, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(93, 93, 93)))))
+                                .addGap(203, 203, 203)
+                                .addComponent(jLabel1))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jLabelCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(buttonSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(textFieldHotel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(buttonActualizar2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(37, 37, 37)
+                                            .addComponent(textFieldCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel7)
+                                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                                    .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(33, 33, 33)
+                                                    .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(30, 30, 30)
+                                                    .addComponent(buttonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addGap(27, 27, 27)
+                                                    .addComponent(buttonActualizar3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel8)))))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -242,16 +285,27 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addComponent(jLabel8))
-                    .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonActualizar1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonActualizar3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabelCantidad))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonActualizar2)
                     .addComponent(buttonSelect)
@@ -283,7 +337,7 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
             if (hotel == null) {
                 actualizarLista(1);
             } else {
-
+                actualizarLista(2);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
@@ -293,38 +347,61 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
     private void buttonActualizar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizar2ActionPerformed
         SelectCliente sc = new SelectCliente(null, closable);
         sc.setVisible(true);
-        if (sc.getClienteSelec() != null) {
-            setCliente(sc.getClienteSelec());
+        setCliente(sc.getClienteSelec());
+        if (cliente != null) {
             textFieldCliente.setText(cliente.getNombre());
         } else {
-            textFieldCliente.setText("Sin Seleccionar");
+            textFieldCliente.setText(SIN_SELECCIONAR);
         }
     }//GEN-LAST:event_buttonActualizar2ActionPerformed
 
     private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
         SelectHotel sh = new SelectHotel(null, closable);
         sh.setVisible(true);
-        if (sh.getHotelSeleccionado() != null) {
-            setHotel(sh.getHotelSeleccionado());
+        setHotel(sh.getHotelSeleccionado());
+        if (hotel != null) {
             textFieldHotel.setText(hotel.getNombre());
         } else {
-            textFieldHotel.setText("Sin Seleccionar");
+            textFieldHotel.setText(SIN_SELECCIONAR);
         }
     }//GEN-LAST:event_buttonSelectActionPerformed
 
-    private void actualizarLista(int opcion) throws Exception{
+    private void buttonActualizar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizar1ActionPerformed
+        try {
+            actualizarLista(3);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonActualizar1ActionPerformed
+
+    private void buttonActualizar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonActualizar3ActionPerformed
+        try {
+            actualizarLista(4);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage(), "error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buttonActualizar3ActionPerformed
+
+    private void actualizarLista(int opcion) throws Exception {
         listaAlojamientosObser.clear();
         if (opcion == 1) {
-            if (ManejadorAlojamiento.getInstance().getAlojamientosByCliente(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente) != null) {
-                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByCliente(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente));
-                String algo = "";
+            if (ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndDate(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente) != null) {
+                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndDate(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente));
             }
-        } else if(opcion == 2){
-            if(ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndHotel(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente, hotel.getId()) != null){
-                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndHotel(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente, hotel.getId()));
-                String algo = " ";
+        } else if (opcion == 2) {
+            if (ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndDateAndHotel(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente, hotel.getId()) != null) {
+                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByClienteAndDateAndHotel(jDateChooserInicio.getDate(), jDateChooserSalida.getDate(), cliente, hotel.getId()));
+            }
+        } else if (opcion == 3) {
+            if (ManejadorAlojamiento.getInstance().getAlojamientos() != null) {
+                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientos());
+            }
+        } else if (opcion == 4) {
+            if (ManejadorAlojamiento.getInstance().getAlojamientosByCliente(cliente) != null) {
+                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByCliente(cliente));
             }
         }
+        jLabelCantidad.setText(Integer.toString(listaAlojamientosObser.size()));
     }
 
     public ObservableList<Alojamiento> getListaAlojamientosObser() {
@@ -362,14 +439,18 @@ public class ReporteAlojamientosConsumos extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonActualizar;
+    private javax.swing.JButton buttonActualizar1;
     private javax.swing.JButton buttonActualizar2;
+    private javax.swing.JButton buttonActualizar3;
     private javax.swing.JButton buttonSelect;
     private com.toedter.calendar.JDateChooser jDateChooserInicio;
     private com.toedter.calendar.JDateChooser jDateChooserSalida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelCantidad;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;

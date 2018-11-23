@@ -43,6 +43,8 @@ public class ManejadorMenu {
             throw new Exception("Ingrese todo los datos necesarios");
         } else if (nombre.length() > 20 || descripcion.length() > 100) {
             throw new Exception("El tamaño de las cadenas de 'Nombre' o 'Descripcion' superan el limite maximo");
+        } else if (rest == null) {
+            throw new Exception("No se ha seleccionado un restaurante valido");
         } else {
             String accion = "INSERT INTO MENU ( NOMBRE, DESCRIPCION, TIPO, PRECIO, COSTO, ID_RESTAURANTE,"
                     + "NOMBRE_RESTAURANTE) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
@@ -55,12 +57,12 @@ public class ManejadorMenu {
     }
     
     public List getMenus() {
-        String consulta = "SELECT * FROM MENU";
+        String consulta = "SELECT * FROM MENU ORDER BY PRECIO";
         return ManejadorBaseDatos.getInstance().getMenu(consulta, 0, null);
     }
     
     public List getMenusByRestaurante(Restaurante restaurante) {
-        String consulta = "SELECT * FROM MENU WHERE ID_RESTAURANTE = ?";
+        String consulta = "SELECT * FROM MENU WHERE ID_RESTAURANTE = ? ORDER BY PRECIO";
         return ManejadorBaseDatos.getInstance().getMenu(consulta, 1, Integer.toString(restaurante.getId()));
     }
     
@@ -70,7 +72,7 @@ public class ManejadorMenu {
     }
 
     public List getMenuByTipo(String tipo) {
-        String consulta = "SELECT * FROM MENU WHERE TIPO = ?";
+        String consulta = "SELECT * FROM MENU WHERE TIPO = ? ORDER BY PRECIO";
         return ManejadorBaseDatos.getInstance().getMenu(consulta, 1, tipo);
     }
     

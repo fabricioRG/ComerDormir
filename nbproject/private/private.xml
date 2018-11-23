@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/reservacion/RegistradorReservacion.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/backend/basedatos/ManejadorBaseDatos.java</file>
             <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/comerdormir/frontend/ComerDormirDesktop.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/backend/reservacion/ManejadorReservacion.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/empleado/CreadorGerenteH.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/backend/habitacion/ManejadorHabitacion.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/backend/empleado/ManejadorEmpleado.java</file>
-            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/habitacion/CreadorHabitacion.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/comerdormir/frontend/MenuPrincipal.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/alojamiento/ReporteAlojamientosConsumos.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/consumo/TomarPedido.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/cliente/SelectCliente.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/Comer&amp;Dormir/src/project/frontend/alojamiento/CheckOut.java</file>
         </group>
     </open-files>
 </project-private>

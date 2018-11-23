@@ -42,13 +42,12 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
     /**
      * Creates new form CreadorUsuario
      */
-    public PromocionHabitacion(Hotel hotel) {
+    public PromocionHabitacion() {
         this.hotel = hotel;
         this.listaAloj = new LinkedList<>();
         this.listaAlojamientosObser = ObservableCollections.observableList(listaAloj);
         this.path = BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH;
         initComponents();
-        obtenerHabitacion();
     }
 
     /**
@@ -156,7 +155,7 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
         buttonActualizar.setBackground(new java.awt.Color(246, 145, 1));
         buttonActualizar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         buttonActualizar.setForeground(new java.awt.Color(254, 254, 254));
-        buttonActualizar.setText("Actualizar");
+        buttonActualizar.setText("Seleccionar Hotel");
         buttonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonActualizarActionPerformed(evt);
@@ -194,11 +193,11 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
         jLabel5.setForeground(new java.awt.Color(254, 254, 254));
         jLabel5.setText("Porcentaje*:");
 
-        formattedTextFieldPrecio.setBackground(new java.awt.Color(2, 124, 139));
+        formattedTextFieldPrecio.setBackground(new java.awt.Color(254, 254, 254));
         formattedTextFieldPrecio.setBorder(javax.swing.BorderFactory.createEmptyBorder(7, 7, 7, 7));
-        formattedTextFieldPrecio.setForeground(new java.awt.Color(254, 254, 254));
-        formattedTextFieldPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
-        formattedTextFieldPrecio.setCaretColor(new java.awt.Color(254, 254, 254));
+        formattedTextFieldPrecio.setForeground(new java.awt.Color(143, 86, 2));
+        formattedTextFieldPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        formattedTextFieldPrecio.setCaretColor(new java.awt.Color(143, 86, 2));
 
         jLabel7.setForeground(new java.awt.Color(254, 254, 254));
         jLabel7.setText("Fecha de Inicio*:");
@@ -206,7 +205,7 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(254, 254, 254));
         jLabel8.setText("Fecha de Salida*:");
 
-        buttonVerificar.setBackground(new java.awt.Color(70, 130, 180));
+        buttonVerificar.setBackground(new java.awt.Color(246, 145, 1));
         buttonVerificar.setFont(new java.awt.Font("Caviar Dreams", 0, 14)); // NOI18N
         buttonVerificar.setForeground(new java.awt.Color(254, 254, 254));
         buttonVerificar.setText("Crear Promocion");
@@ -247,29 +246,26 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
                                 .addGap(42, 42, 42)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel5)
-                                                .addComponent(formattedTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(formattedTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel5))
                                             .addGap(28, 28, 28)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel7)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                                     .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addGap(26, 26, 26)
-                                                    .addComponent(buttonVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(buttonVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel7))
+                                            .addGap(18, 18, 18)
                                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(jLabel8)
-                                                    .addGap(54, 54, 54))
-                                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                                    .addGap(18, 18, 18)
                                                     .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                            .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                    .addGap(35, 35, 35)
+                                                    .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jLabel8)))))))
                         .addGap(0, 43, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -291,28 +287,24 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(formattedTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(buttonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel1Layout.createSequentialGroup()
-                                            .addComponent(jLabel8)
-                                            .addGap(35, 35, 35)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(41, 41, 41)
-                                .addComponent(buttonVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jDateChooserInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDateChooserSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(formattedTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buttonVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(2, 2, 2))
+                            .addComponent(jDateChooserInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooserSalida, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(buttonActualizar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(146, 146, 146))
         );
 
@@ -343,13 +335,13 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
 
     private void buttonVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerificarActionPerformed
         if (jDateChooserInicio.getDate() == null || jDateChooserSalida.getDate() == null) {
-            JOptionPane.showMessageDialog(rootPane, "No es posible filtrar las reservaciones, intentelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(rootPane, "Fechas vacias, intentelo de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         } else if (jDateChooserInicio.getDate().compareTo(jDateChooserSalida.getDate()) >= 0) {
             JOptionPane.showMessageDialog(rootPane, "Fechas incorrectas, intentelo de nuevo", "error", JOptionPane.ERROR_MESSAGE);
         } else {
             try {
                 if (hotel != null) {
-                    ManejadorPromocion.getInstance().setPromocionHabitacion(habitacion, formattedTextFieldPrecio.getText().trim(), 
+                    ManejadorPromocion.getInstance().setPromocionHabitacion(habitacion, formattedTextFieldPrecio.getText().trim(),
                             jDateChooserInicio.getDate(), jDateChooserSalida.getDate());
                     JOptionPane.showMessageDialog(rootPane, "Se ha registrado la promocion con exito");
                 } else {
@@ -366,22 +358,27 @@ public class PromocionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void obtenerHabitacion() {
-        listaAlojamientosObser.clear();
-        if (ManejadorHabitacion.getInstance().getHabitacionPopular(hotel) != null) {
-            habitacion = ManejadorHabitacion.getInstance().getHabitacionPopular(hotel);
-            jLabelAlojamientos.setText(Integer.toString(habitacion.getNumero()));
-            habitacion.setNumero(ManejadorHabitacion.getInstance().getHabitacionByID(habitacion.getId()).getNumero());
-            habitacion.setIdHotel(ManejadorHabitacion.getInstance().getHabitacionByID(habitacion.getId()).getIdHotel());
-            habitacion.setNombreHotel(ManejadorHotel.getInstance().getHotelById(habitacion.getIdHotel()).getNombre());
-            jLabelNumero.setText(Integer.toString(habitacion.getNumero()));
-            jLabelHotel.setText(habitacion.getNombreHotel());
-            if (ManejadorAlojamiento.getInstance().getAlojamientosByIdHabitacion(habitacion.getId()) != null) {
-                listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByIdHabitacion(habitacion.getId()));
+        SelectHotel sh = new SelectHotel(null, closable);
+        sh.setVisible(true);
+        if (sh.getHotelSeleccionado() != null) {
+            setHotel(sh.getHotelSeleccionado());
+            listaAlojamientosObser.clear();
+            if (ManejadorHabitacion.getInstance().getHabitacionPopular(hotel) != null) {
+                habitacion = ManejadorHabitacion.getInstance().getHabitacionPopular(hotel);
+                jLabelAlojamientos.setText(Integer.toString(habitacion.getNumero()));
+                habitacion.setNumero(ManejadorHabitacion.getInstance().getHabitacionByID(habitacion.getId()).getNumero());
+                habitacion.setIdHotel(ManejadorHabitacion.getInstance().getHabitacionByID(habitacion.getId()).getIdHotel());
+                habitacion.setNombreHotel(ManejadorHotel.getInstance().getHotelById(habitacion.getIdHotel()).getNombre());
+                jLabelNumero.setText(Integer.toString(habitacion.getNumero()));
+                jLabelHotel.setText(habitacion.getNombreHotel());
+                if (ManejadorAlojamiento.getInstance().getAlojamientosByIdHabitacion(habitacion.getId()) != null) {
+                    listaAlojamientosObser.addAll(ManejadorAlojamiento.getInstance().getAlojamientosByIdHabitacion(habitacion.getId()));
+                }
+            } else {
+                jLabelNumero.setText("");
+                jLabelHotel.setText("");
+                jLabelAlojamientos.setText("");
             }
-        } else {
-            jLabelNumero.setText("");
-            jLabelHotel.setText("");
-            jLabelAlojamientos.setText("");
         }
     }
 

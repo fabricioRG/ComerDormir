@@ -11,7 +11,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import project.backend.alojamiento.Alojamiento;
 import project.backend.basedatos.ManejadorBaseDatos;
+import project.backend.cliente.Cliente;
 import project.backend.menu.Menu;
+import project.backend.restaurante.Restaurante;
 
 /**
  *
@@ -54,27 +56,56 @@ public class ManejadorConsumo {
         }
     }
 
-    public List getConsumos(){
-        String consulta = "SELECT * FROM CONSUMO";
+    public List getConsumos() {
+        String consulta = "SELECT * FROM CONSUMO ORDER BY FECHA DESC";
         return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
     }
-    
-    public List getConsumosByRest(int idRestaurante){
-        String consulta = "SELECT * FROM CONSUMO WHERE ID_RESTAURANTE = ?";
+
+    public List getConsumosByRest(int idRestaurante) {
+        String consulta = "SELECT * FROM CONSUMO WHERE ID_RESTAURANTE = ? ORDER BY FECHA DESC";
         return ManejadorBaseDatos.getInstance().getConsumos(consulta, 1, Integer.toString(idRestaurante));
     }
-    
-    public List getConsumosByEntradaSalida(Date inicio, Date salida){
+
+    public List getConsumosByEntradaSalida(Date inicio, Date salida) {
         String consulta = "SELECT * FROM CONSUMO WHERE FECHA < '" + fechaFormat.format(salida) + "' && FECHA >= '"
                 + fechaFormat.format(inicio) + "'";
         return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
     }
-    
-    public List getConsumosByCliente(Date inicio, Date salida, int dpiClient){
-        String consulta = "SELECT CONSUMO.* FROM CONSUMO ALOJAMIENTO WHERE CONSUMO.FECHA < '" + fechaFormat.format(salida) + "' && "
-                + " CONSUMO.FECHA >= '" + fechaFormat.format(inicio) + "' AND ALOJAMIENTO.ID = CONSUMO.ID_ALOJAMIENTO AND "
-                + "ALOJAMIENTO.DPI_CLIENTE = ' " + dpiClient + "' ";
-        return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
+
+    public List getConsumosByClienteAndDate(Date inicio, Date salida, Cliente cliente) throws Exception {
+        if (cliente == null) {
+            throw new Exception("No se ha cargado el cliente");
+        } else if (inicio == null || salida == null) {
+            throw new Exception("Fechas incorrectas");
+        } else {
+            String consulta = "SELECT CONSUMO.* FROM CONSUMO, ALOJAMIENTO WHERE CONSUMO.FECHA < '" + fechaFormat.format(salida) + "' && "
+                    + " CONSUMO.FECHA >= '" + fechaFormat.format(inicio) + "' AND ALOJAMIENTO.ID = CONSUMO.ID_ALOJAMIENTO AND "
+                    + "ALOJAMIENTO.DPI_CLIENTE = ' " + cliente.getDpi() + "' ORDER BY CONSUMO.FECHA DESC";
+            return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
+        }
+    }
+
+    public List getConsumosByCliente(Cliente cliente) throws Exception {
+        if (cliente == null) {
+            throw new Exception("No se ha cargado el cliente");
+        } else {
+            String consulta = "SELECT CONSUMO.* FROM CONSUMO, ALOJAMIENTO WHERE  ALOJAMIENTO.ID = CONSUMO.ID_ALOJAMIENTO AND "
+                    + "ALOJAMIENTO.DPI_CLIENTE = ' " + cliente.getDpi() + "' ORDER BY CONSUMO.FECHA DESC";
+            return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
+        }
+    }
+
+    public List getConsumosByClienteAndDateAndRest(Date inicio, Date salida, Cliente cliente, Restaurante resta) throws Exception {
+        if (cliente == null) {
+            throw new Exception("No se ha cargado el cliente");
+        } else if (inicio == null || salida == null) {
+            throw new Exception("Fechas incorrectas");
+        } else {
+            String consulta = "SELECT CONSUMO.* FROM CONSUMO, ALOJAMIENTO WHERE CONSUMO.FECHA < '" + fechaFormat.format(salida) + "' && "
+                    + " CONSUMO.FECHA >= '" + fechaFormat.format(inicio) + "' AND ALOJAMIENTO.ID = CONSUMO.ID_ALOJAMIENTO AND "
+                    + "ALOJAMIENTO.DPI_CLIENTE = ' " + cliente.getDpi() + "' AND CONSUMO.ID_RESTAURANTE = '" + resta.getId() + "' ORDER BY CONSUMO.FECHA DESC";
+            return ManejadorBaseDatos.getInstance().getConsumos(consulta, 0, null);
+        }
     }
     
 }

@@ -11,8 +11,11 @@ import org.jdesktop.observablecollections.ObservableList;
 import project.backend.habitacion.Habitacion;
 import project.backend.habitacion.ManejadorHabitacion;
 import project.backend.hotel.Hotel;
+import project.backend.promocion.ManejadorPromocion;
+import project.backend.promocion.Promocion;
 import project.backend.reservacion.ManejadorReservacion;
 import project.frontend.hotel.SelectHotel;
+import project.frontend.promocion.ShowPromoHab;
 
 /**
  *
@@ -25,6 +28,7 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
     private Habitacion habitacionSelec = null;
     private Hotel hotel = null;
     public String path;
+    private double nuevoPrecio = 0;
     private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur2.jpg";
 
     public RegistradorReservacion() {
@@ -69,6 +73,7 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
         buttonSelect = new javax.swing.JButton();
         textFieldHotel = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        buttonVerificar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 99, 71));
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -174,6 +179,16 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
         jLabel3.setForeground(new java.awt.Color(254, 254, 254));
         jLabel3.setText("Hotel*:");
 
+        buttonVerificar1.setBackground(new java.awt.Color(70, 130, 180));
+        buttonVerificar1.setFont(new java.awt.Font("Caviar Dreams", 0, 14)); // NOI18N
+        buttonVerificar1.setForeground(new java.awt.Color(254, 254, 254));
+        buttonVerificar1.setText("Promociones");
+        buttonVerificar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonVerificar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -205,8 +220,9 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jDateChooserSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel5))
-                                        .addGap(27, 27, 27))
+                                            .addComponent(jLabel5)
+                                            .addComponent(buttonVerificar1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(7, 7, 7))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -238,8 +254,13 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(buttonVerificar)
-                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonVerificar)
+                        .addGap(12, 12, 12))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(buttonVerificar1)
+                        .addGap(18, 18, 18)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -251,10 +272,11 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(textFieldHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonSelect)
-                            .addComponent(jDateChooserInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jDateChooserInicio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(textFieldHotel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonSelect)))))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -301,15 +323,21 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         buttonRegistrar.setEnabled(true);
-        double monto = ManejadorReservacion.getInstance().getCantidadDias(jDateChooserInicio.getDate(), jDateChooserSalida.getDate()) 
+        Promocion promo = ManejadorPromocion.getInstance().getPromocionByDateHabitacion(jDateChooserInicio.getDate(), jDateChooserSalida.getDate());
+        if (promo != null) {
+            if (promo.getIdHabitacion() == habitacionSelec.getId()) {
+                nuevoPrecio = habitacionSelec.getPrecio() * (1.00 - promo.getPorcentaje());
+            }
+        }
+        
+        double monto = ManejadorReservacion.getInstance().getCantidadDias(jDateChooserInicio.getDate(), jDateChooserSalida.getDate())
                 * habitacionSelec.getPrecio();
         jLabelMontoPagar.setText("Q. " + monto);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void buttonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRegistrarActionPerformed
         try {
-            
-            ManejadorReservacion.getInstance().setReservacion(formattedTextFieldDPI.getText().trim(), habitacionSelec, jDateChooserInicio.getDate(), 
+            ManejadorReservacion.getInstance().setReservacion(formattedTextFieldDPI.getText().trim(), habitacionSelec, jDateChooserInicio.getDate(),
                     jDateChooserSalida.getDate(), hotel);
             listaHabtObser.clear();
         } catch (Exception e) {
@@ -321,7 +349,7 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
     private void buttonSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSelectActionPerformed
         SelectHotel sh = new SelectHotel(null, closable);
         sh.setVisible(true);
-        if(sh.getHotelSeleccionado() != null){
+        if (sh.getHotelSeleccionado() != null) {
             setHotel(sh.getHotelSeleccionado());
             textFieldHotel.setText(hotel.getNombre());
             buttonVerificar.setEnabled(true);
@@ -331,12 +359,17 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonSelectActionPerformed
 
+    private void buttonVerificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerificar1ActionPerformed
+        ShowPromoHab sph = new ShowPromoHab(null, closable);
+        sph.setVisible(true);
+    }//GEN-LAST:event_buttonVerificar1ActionPerformed
+
     private void actualizarListas() {
         listaHabtObser.clear();
-        if(ManejadorHabitacion.getInstance().getHabitacionesByDate(jDateChooserInicio.getDate(), 
-                jDateChooserSalida.getDate(), hotel) != null){
-            listaHabtObser.addAll(ManejadorHabitacion.getInstance().getHabitacionesByDate(jDateChooserInicio.getDate(), 
-                jDateChooserSalida.getDate(), hotel));
+        if (ManejadorHabitacion.getInstance().getHabitacionesByDate(jDateChooserInicio.getDate(),
+                jDateChooserSalida.getDate(), hotel) != null) {
+            listaHabtObser.addAll(ManejadorHabitacion.getInstance().getHabitacionesByDate(jDateChooserInicio.getDate(),
+                    jDateChooserSalida.getDate(), hotel));
         }
         buttonRegistrar.setEnabled(false);
     }
@@ -370,6 +403,7 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonRegistrar;
     private javax.swing.JButton buttonSelect;
     private javax.swing.JButton buttonVerificar;
+    private javax.swing.JButton buttonVerificar1;
     private javax.swing.JFormattedTextField formattedTextFieldDPI;
     private com.toedter.calendar.JDateChooser jDateChooserInicio;
     private com.toedter.calendar.JDateChooser jDateChooserSalida;

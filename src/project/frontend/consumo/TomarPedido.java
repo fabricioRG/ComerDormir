@@ -12,8 +12,11 @@ import project.backend.alojamiento.Alojamiento;
 import project.backend.consumo.ManejadorConsumo;
 import project.backend.menu.ManejadorMenu;
 import project.backend.menu.Menu;
+import project.backend.promocion.ManejadorPromocion;
+import project.backend.promocion.Promocion;
 import project.backend.restaurante.Restaurante;
 import project.frontend.alojamiento.SelectAlojamiento;
+import project.frontend.promocion.ShowPromoReser;
 import project.frontend.restaurante.SelectRestaurante;
 
 /**
@@ -75,6 +78,7 @@ public class TomarPedido extends javax.swing.JInternalFrame {
         textFieldAloja = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jDateChooser = new com.toedter.calendar.JDateChooser();
+        buttonAloja1 = new javax.swing.JButton();
 
         jTextField7.setBackground(new java.awt.Color(254, 254, 254));
         jTextField7.setForeground(new java.awt.Color(1, 1, 1));
@@ -183,6 +187,16 @@ public class TomarPedido extends javax.swing.JInternalFrame {
         jLabel14.setForeground(new java.awt.Color(139, 71, 33));
         jLabel14.setText("Fecha*:");
 
+        buttonAloja1.setBackground(new java.awt.Color(246, 145, 1));
+        buttonAloja1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        buttonAloja1.setForeground(new java.awt.Color(254, 254, 254));
+        buttonAloja1.setText("Promociones");
+        buttonAloja1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAloja1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -200,22 +214,25 @@ public class TomarPedido extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                            .addComponent(buttonAloja, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(textFieldAloja, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(26, 26, 26)
+                                            .addComponent(jLabel14)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(76, 76, 76)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabelMontoPagar, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(buttonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(buttonAloja, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textFieldAloja, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(26, 26, 26)
-                                        .addComponent(jLabel14)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(76, 76, 76)))))
+                                        .addComponent(buttonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(71, 71, 71)
+                                        .addComponent(buttonAloja1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 33, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -239,7 +256,8 @@ public class TomarPedido extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttonRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabelMontoPagar))
+                    .addComponent(jLabelMontoPagar)
+                    .addComponent(buttonAloja1))
                 .addGap(41, 41, 41))
         );
 
@@ -272,6 +290,11 @@ public class TomarPedido extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonRegistrarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        Promocion promo = ManejadorPromocion.getInstance().getPromocionBySingleDateRestaurante(jDateChooser.getDate(), restaurante);
+        if(promo != null){
+            double nuevoPrecio = elementoSelec.getPrecio() * (1 - promo.getPorcentaje());
+            elementoSelec.setPrecio(nuevoPrecio);
+        }
         jLabelMontoPagar.setText("Q. " + elementoSelec.getPrecio());
         buttonRegistrar.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
@@ -282,6 +305,7 @@ public class TomarPedido extends javax.swing.JInternalFrame {
         if(sa.getAlojaSelect() != null){
             setAlojamiento(sa.getAlojaSelect());
             textFieldAloja.setText(alojamiento.getNombreCliente());
+            jDateChooser.setDate(alojamiento.getFechaEntrada());
         } else {
             textFieldAloja.setText("Sin seleccionar");
         }
@@ -290,6 +314,11 @@ public class TomarPedido extends javax.swing.JInternalFrame {
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1MouseEntered
+
+    private void buttonAloja1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAloja1ActionPerformed
+        ShowPromoReser spr = new ShowPromoReser(null, closable);
+        spr.setVisible(true);
+    }//GEN-LAST:event_buttonAloja1ActionPerformed
 
     private void actualizarLista() {
         listaMenuObser.clear();
@@ -332,6 +361,7 @@ public class TomarPedido extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAloja;
+    private javax.swing.JButton buttonAloja1;
     private javax.swing.JButton buttonRegistrar;
     private com.toedter.calendar.JDateChooser jDateChooser;
     private javax.swing.JLabel jLabel1;

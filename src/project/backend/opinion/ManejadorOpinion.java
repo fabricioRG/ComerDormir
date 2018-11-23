@@ -92,4 +92,10 @@ public class ManejadorOpinion {
         String accion = "SELECT * FROM OPINION_RESTAURANTE ORDER BY PUNTUACION DESC";
         return ManejadorBaseDatos.getInstance().getOpinionesRestaurante(accion, 0, null);
     }
+    
+    public List getOpinionesByIdRestaurante(int idRestaurante){
+        String consulta = "SELECT * FROM OPINION_RESTAURANTE WHERE ID_RESTAURANTE = ? ORDER BY PUNTUACION DESC";
+        return ManejadorBaseDatos.getInstance().getOpinionesRestaurante(consulta, 1, Integer.toString(idRestaurante));
+    }
+    
 }

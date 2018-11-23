@@ -134,36 +134,32 @@
                                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Group type="102" attributes="0">
+                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                          <Component id="jScrollPane1" min="-2" pref="852" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="1" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="formattedTextFieldPrecio" alignment="0" min="-2" pref="103" max="-2" attributes="0"/>
+                                                  <Component id="formattedTextFieldPrecio" min="-2" pref="103" max="-2" attributes="0"/>
+                                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Group type="102" alignment="0" attributes="0">
                                                       <Component id="jDateChooserInicio" min="-2" pref="125" max="-2" attributes="0"/>
                                                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                                                       <Component id="buttonVerificar" min="-2" pref="174" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                                               </Group>
+                                              <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Group type="102" attributes="0">
-                                                      <EmptySpace max="32767" attributes="0"/>
-                                                      <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" alignment="0" attributes="0">
-                                                      <EmptySpace type="separate" max="-2" attributes="0"/>
                                                       <Component id="jDateChooserSalida" min="-2" pref="125" max="-2" attributes="0"/>
-                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                                      <Component id="buttonActualizar" min="-2" pref="185" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                               </Group>
-                                              <Component id="buttonActualizar" min="-2" pref="218" max="-2" attributes="0"/>
                                           </Group>
-                                          <Component id="jScrollPane1" min="-2" pref="852" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -194,36 +190,29 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="176" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane1" min="-2" pref="176" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" attributes="0">
-                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="formattedTextFieldPrecio" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                          <Component id="buttonActualizar" min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Group type="102" attributes="0">
-                                              <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
+                                      <Component id="formattedTextFieldPrecio" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonVerificar" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-                                  <Component id="buttonVerificar" min="-2" pref="31" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jDateChooserInicio" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jDateChooserSalida" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="jDateChooserInicio" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jDateChooserSalida" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="buttonActualizar" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
               </Group>
@@ -346,7 +335,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Actualizar"/>
+            <Property name="text" type="java.lang.String" value="Seleccionar Hotel"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonActualizarActionPerformed"/>
@@ -440,7 +429,7 @@
         <Component class="javax.swing.JFormattedTextField" name="formattedTextFieldPrecio">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8b" green="7c" red="2" type="rgb"/>
+              <Color blue="fe" green="fe" red="fe" type="rgb"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
@@ -448,13 +437,13 @@
               </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="fe" green="fe" red="fe" type="rgb"/>
+              <Color blue="2" green="56" red="8f" type="rgb"/>
             </Property>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format format="#0" subtype="-1" type="0"/>
+              <Format format="#0.00" subtype="-1" type="0"/>
             </Property>
             <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="fe" green="fe" red="fe" type="rgb"/>
+              <Color blue="2" green="56" red="8f" type="rgb"/>
             </Property>
           </Properties>
         </Component>
@@ -481,7 +470,7 @@
         <Component class="javax.swing.JButton" name="buttonVerificar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="b4" green="82" red="46" type="rgb"/>
+              <Color blue="1" green="91" red="f6" type="rgb"/>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Caviar Dreams" size="14" style="0"/>

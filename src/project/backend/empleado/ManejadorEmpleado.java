@@ -102,7 +102,7 @@ public class ManejadorEmpleado {
     }
     
     public List getEmpleadosByRestaurante(int idRestaurante){
-        String consulta = "SELECT * FROM EMPLEADO WHERE ID_HOTEL = ?";
+        String consulta = "SELECT * FROM EMPLEADO WHERE ID_RESTAURANTE = ?";
         return ManejadorBaseDatos.getInstance().getEmpleados(Integer.toString(idRestaurante), null, consulta, 1);
     }
     

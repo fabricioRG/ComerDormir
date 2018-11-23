@@ -9,14 +9,17 @@ import javax.swing.ImageIcon;
 import project.backend.empleado.Empleado;
 import project.backend.hotel.Hotel;
 import project.backend.hotel.ManejadorHotel;
+import project.backend.promocion.ManejadorPromocion;
 import project.backend.restaurante.ManejadorRestaurante;
 import project.frontend.alojamiento.RegistradorAlojamiento;
 import project.frontend.alojamiento.ReporteAlojamientos;
-import project.frontend.alojamiento.ReporteAlojamientosConsumos;
+import project.frontend.alojamiento.ReporteAlojamientosFiltrado;
 import project.frontend.cliente.ModificadorCliente;
 import project.frontend.cliente.RegistradorCliente;
 import project.frontend.cliente.ReporteClientes;
 import project.frontend.consumo.ReporteConsumos;
+import project.frontend.consumo.ReporteConsumosFiltrado;
+import project.frontend.consumo.ReporteGeneralConsumos;
 import project.frontend.consumo.TomarPedido;
 import project.frontend.empleado.CreadorEncargadoR;
 import project.frontend.empleado.CreadorGerenteG;
@@ -43,6 +46,9 @@ import project.frontend.menu.ReporteMenu;
 import project.frontend.opinion.ReporteOpinionesHotel;
 import project.frontend.opinion.ReporteOpinionesRestaurante;
 import project.frontend.promocion.PromocionHabitacion;
+import project.frontend.promocion.PromocionRestaurante;
+import project.frontend.promocion.ReportePromocionHabitacion;
+import project.frontend.promocion.ReportePromocionRestaurante;
 import project.frontend.reservacion.CanceladorReservacion;
 import project.frontend.reservacion.RegistradorReservacion2;
 import project.frontend.reservacion.ReporteReservacion;
@@ -136,6 +142,16 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         jMenu14 = new javax.swing.JMenu();
         jMenuItem24 = new javax.swing.JMenuItem();
         jMenuItem25 = new javax.swing.JMenuItem();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem21 = new javax.swing.JMenuItem();
+        jMenuItem28 = new javax.swing.JMenuItem();
+        jMenuItem22 = new javax.swing.JMenuItem();
+        jMenuItem29 = new javax.swing.JMenuItem();
+        jMenuItem23 = new javax.swing.JMenuItem();
+        jMenu15 = new javax.swing.JMenu();
+        jMenuItem27 = new javax.swing.JMenuItem();
+        jMenu16 = new javax.swing.JMenu();
+        jMenuItem26 = new javax.swing.JMenuItem();
         jMenuHotel = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemCrearUsuario = new javax.swing.JMenuItem();
@@ -147,10 +163,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         jMenuItemCrearMenu = new javax.swing.JMenuItem();
         jMenuItemRepMenu = new javax.swing.JMenuItem();
         jMenuItemModMen = new javax.swing.JMenuItem();
-        jMenu6 = new javax.swing.JMenu();
-        jMenuItem21 = new javax.swing.JMenuItem();
-        jMenuItem22 = new javax.swing.JMenuItem();
-        jMenuItem23 = new javax.swing.JMenuItem();
         jMenuRecepcion = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenuItemRegistrar = new javax.swing.JMenuItem();
@@ -159,7 +171,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItemRegAloj = new javax.swing.JMenuItem();
         jMenuItemRepAloj = new javax.swing.JMenuItem();
-        jMenuItem26 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItemRegClie = new javax.swing.JMenuItem();
         jMenuItemModClie = new javax.swing.JMenuItem();
@@ -183,7 +194,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         labelInformacion.setFont(new java.awt.Font("Caviar Dreams", 1, 36)); // NOI18N
         labelInformacion.setForeground(new java.awt.Color(254, 254, 254));
-        labelInformacion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelInformacion.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         labelInformacion.setText(" ");
 
         jLabelUsuario.setFont(new java.awt.Font("Caviar Dreams", 1, 18)); // NOI18N
@@ -196,9 +207,9 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             jPanelBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PrincipalDesktop, javax.swing.GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
             .addGroup(jPanelBackgroundLayout.createSequentialGroup()
-                .addGap(389, 389, 389)
-                .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(labelInformacion, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(jLabelUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -392,6 +403,74 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         jMenuGerente.add(jMenu14);
 
+        jMenu6.setText("Promociones");
+
+        jMenuItem21.setText("Promocion habitacion");
+        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem21ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem21);
+
+        jMenuItem28.setText("Reporte promo habitacion");
+        jMenuItem28.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem28ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem28);
+
+        jMenuItem22.setText("Promocion restaurante");
+        jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem22ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem22);
+
+        jMenuItem29.setText("Reporte promo restaurante");
+        jMenuItem29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem29ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem29);
+
+        jMenuItem23.setText("Promocion cliente");
+        jMenuItem23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem23ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem23);
+
+        jMenuGerente.add(jMenu6);
+
+        jMenu15.setText("Consumos");
+
+        jMenuItem27.setText("Reporte Consumos");
+        jMenuItem27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem27ActionPerformed(evt);
+            }
+        });
+        jMenu15.add(jMenuItem27);
+
+        jMenuGerente.add(jMenu15);
+
+        jMenu16.setText("Alojamientos");
+
+        jMenuItem26.setText("Alojamientos cliente");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
+        jMenu16.add(jMenuItem26);
+
+        jMenuGerente.add(jMenu16);
+
         menuBar.add(jMenuGerente);
 
         jMenuHotel.setText("Hotel");
@@ -469,24 +548,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
         jMenuHotel.add(jMenu5);
 
-        jMenu6.setText("Promociones");
-
-        jMenuItem21.setText("Promocion habitacion");
-        jMenuItem21.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem21ActionPerformed(evt);
-            }
-        });
-        jMenu6.add(jMenuItem21);
-
-        jMenuItem22.setText("Promocion restaurante");
-        jMenu6.add(jMenuItem22);
-
-        jMenuItem23.setText("Promocion cliente");
-        jMenu6.add(jMenuItem23);
-
-        jMenuHotel.add(jMenu6);
-
         menuBar.add(jMenuHotel);
 
         jMenuRecepcion.setText("Recepcion");
@@ -537,14 +598,6 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
             }
         });
         jMenu3.add(jMenuItemRepAloj);
-
-        jMenuItem26.setText("Alojamientos cliente");
-        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem26ActionPerformed(evt);
-            }
-        });
-        jMenu3.add(jMenuItem26);
 
         jMenuRecepcion.add(jMenu3);
 
@@ -750,8 +803,8 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItemReporConActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReporConActionPerformed
-                ReporteConsumos rc = new ReporteConsumos(ManejadorRestaurante.getInstance().getRestauranteByID(empleado.getIdRestaurante()));
-                añadirComponente(rc);
+        ReporteConsumos rc = new ReporteConsumos(ManejadorRestaurante.getInstance().getRestauranteByID(empleado.getIdRestaurante()));
+        añadirComponente(rc);
     }//GEN-LAST:event_jMenuItemReporConActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -845,7 +898,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem21ActionPerformed
-        PromocionHabitacion ph = new PromocionHabitacion(hotel);
+        PromocionHabitacion ph = new PromocionHabitacion();
         añadirComponente(ph);
     }//GEN-LAST:event_jMenuItem21ActionPerformed
 
@@ -860,9 +913,33 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem25ActionPerformed
 
     private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
-        ReporteAlojamientosConsumos rac = new ReporteAlojamientosConsumos();
+        ReporteAlojamientosFiltrado rac = new ReporteAlojamientosFiltrado();
         añadirComponente(rac);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jMenuItem27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem27ActionPerformed
+        ReporteConsumosFiltrado rcf = new ReporteConsumosFiltrado();
+        añadirComponente(rcf);
+    }//GEN-LAST:event_jMenuItem27ActionPerformed
+
+    private void jMenuItem23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem23ActionPerformed
+
+    }//GEN-LAST:event_jMenuItem23ActionPerformed
+
+    private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
+        PromocionRestaurante pr = new PromocionRestaurante();
+        añadirComponente(pr);
+    }//GEN-LAST:event_jMenuItem22ActionPerformed
+
+    private void jMenuItem28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem28ActionPerformed
+        ReportePromocionHabitacion rph = new ReportePromocionHabitacion();
+        añadirComponente(rph);
+    }//GEN-LAST:event_jMenuItem28ActionPerformed
+
+    private void jMenuItem29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem29ActionPerformed
+        ReportePromocionRestaurante rpr = new ReportePromocionRestaurante();
+        añadirComponente(rpr);
+    }//GEN-LAST:event_jMenuItem29ActionPerformed
 
     /*Metodo encargado de modificar el color del "menuBar" , asi como colocar el nombre del cliente y 
     su cargo en el hotel*/
@@ -933,6 +1010,8 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu12;
     private javax.swing.JMenu jMenu13;
     private javax.swing.JMenu jMenu14;
+    private javax.swing.JMenu jMenu15;
+    private javax.swing.JMenu jMenu16;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -962,6 +1041,9 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem27;
+    private javax.swing.JMenuItem jMenuItem28;
+    private javax.swing.JMenuItem jMenuItem29;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;

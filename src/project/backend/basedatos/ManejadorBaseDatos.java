@@ -861,6 +861,34 @@ public class ManejadorBaseDatos {
         return promo;
     }
 
+    public List getPromocionesHabitacion(String consulta, String dato, int opcion) {
+        List<Promocion> promociones = new LinkedList<>();
+        Promocion promo = null;
+        try {
+            sentencia = connection.prepareStatement(consulta);
+            if (opcion == 1) {
+                sentencia.setString(1, dato);
+            }
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("ID");
+                int idHabitacion = resultado.getInt("ID_HABITACION");
+                int numeroHabitacion = resultado.getInt("NUMERO_HABITACION");
+                String nombreHotel = resultado.getString("NOMBRE_HOTEL");
+                double porcentaje = resultado.getDouble("PORCENTAJE");
+                Date fechaInicio = resultado.getDate("FECHA_INICIO");
+                Date fechaFinal = resultado.getDate("FECHA_FINAL");
+                promo = new PromocionBuilder().id(id).idHabitacion(idHabitacion).numeroHabitacion(numeroHabitacion).
+                        nombreHotel(nombreHotel).porcentaje(porcentaje).fechaInicio(fechaInicio).fechaFinal(fechaFinal).build();
+                promociones.add(promo);
+            }
+            sentencia.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return promociones;
+    }
+    
     public void setPromocionHabitacion(String accion, Promocion promo) {
         try {
             sentencia = connection.prepareStatement(accion);
@@ -876,7 +904,74 @@ public class ManejadorBaseDatos {
             e.printStackTrace(System.out);
         }
     }
+    
+    public void setPromocionRestaurante(String accion, Promocion promo) {
+        try {
+            sentencia = connection.prepareStatement(accion);
+            sentencia.setInt(1, promo.getIdRestaurante());
+            sentencia.setString(2, promo.getNombreRestaurante());
+            sentencia.setDouble(3, promo.getPorcentaje());
+            sentencia.setString(4, fechaFormat.format(promo.getFechaInicio()));
+            sentencia.setString(5, fechaFormat.format(promo.getFechaFinal()));
+            sentencia.executeUpdate();
+            sentencia.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+    }
 
+    public Promocion getPromocionRestaurante(String consulta, String dato, int opcion) {
+        Promocion promo = null;
+        try {
+            sentencia = connection.prepareStatement(consulta);
+            if (opcion == 1) {
+                sentencia.setString(1, dato);
+            }
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("ID");
+                int idRestaurante = resultado.getInt("ID_RESTAURANTE");
+                String nombreRestaurante = resultado.getString("NOMBRE_RESTAURANTE");
+                double porcentaje = resultado.getDouble("PORCENTAJE");
+                Date fechaInicio = resultado.getDate("FECHA_INICIO");
+                Date fechaFinal = resultado.getDate("FECHA_FINAL");
+                promo = new PromocionBuilder().id(id).idRestaurante(idRestaurante).nombreRestaurante(nombreRestaurante)
+                        .porcentaje(porcentaje).fechaInicio(fechaInicio).fechaFinal(fechaFinal).build();
+            }
+            sentencia.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return promo;
+    }
+    
+    public List getPromocionesRestaurante(String consulta, String dato, int opcion) {
+        List<Promocion> promociones = new LinkedList<>();
+        Promocion promo = null;
+        try {
+            sentencia = connection.prepareStatement(consulta);
+            if (opcion == 1) {
+                sentencia.setString(1, dato);
+            }
+            ResultSet resultado = sentencia.executeQuery();
+            while (resultado.next()) {
+                int id = resultado.getInt("ID");
+                int idRestaurante = resultado.getInt("ID_RESTAURANTE");
+                String nombreRestaurante = resultado.getString("NOMBRE_RESTAURANTE");
+                double porcentaje = resultado.getDouble("PORCENTAJE");
+                Date fechaInicio = resultado.getDate("FECHA_INICIO");
+                Date fechaFinal = resultado.getDate("FECHA_FINAL");
+                promo = new PromocionBuilder().id(id).idRestaurante(idRestaurante).nombreRestaurante(nombreRestaurante)
+                        .porcentaje(porcentaje).fechaInicio(fechaInicio).fechaFinal(fechaFinal).build();
+                promociones.add(promo);
+            }
+            sentencia.close();
+        } catch (Exception e) {
+            e.printStackTrace(System.out);
+        }
+        return promociones;
+    }
+    
     public void setOpinionHotel(String accion, Opinion opinion, int opcion) {
         try {
             sentencia = connection.prepareStatement(accion);

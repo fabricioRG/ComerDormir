@@ -58,20 +58,30 @@ public class ManejadorAlojamiento {
         return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, null, 0);
     }
 
-    public List getAlojamientosByCliente(Date inicio, Date salida, Cliente cliente) throws Exception {
+    public List getAlojamientosByClienteAndDate(Date inicio, Date salida, Cliente cliente) throws Exception {
         if (cliente == null) {
             throw new Exception("No se ha cargado el cliente");
         } else if (inicio == null || salida == null) {
             throw new Exception("Fechas incorrectas");
         } else {
             Alojamiento aloj = new AlojamientoBuilder().dpiCliente(cliente.getDpi()).builder();
-            String consulta = "SELECT * FROM ALOJAMIENTO WHERE FECHA_ENTRADA > '" + fechaFormat.format(salida) + "' && FECHA_SALIDA < '"
-                    + fechaFormat.format(inicio) + "' && DPI_CLIENTE = '" + cliente.getDpi() + "'";
-            return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, aloj, 3);
+            String consulta = "SELECT * FROM ALOJAMIENTO WHERE FECHA_ENTRADA < '" + fechaFormat.format(salida) + "' AND FECHA_SALIDA > '"
+                    + fechaFormat.format(inicio) + "' AND DPI_CLIENTE = '" + cliente.getDpi() + "'";
+            return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, aloj, 0);
+        }
+    }
+    
+    public List getAlojamientosByCliente(Cliente cliente) throws Exception {
+        if (cliente == null) {
+            throw new Exception("No se ha cargado el cliente");
+        } else {
+            Alojamiento aloj = new AlojamientoBuilder().dpiCliente(cliente.getDpi()).builder();
+            String consulta = "SELECT * FROM ALOJAMIENTO WHERE  DPI_CLIENTE = '" + cliente.getDpi() + "'";
+            return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, aloj, 0);
         }
     }
 
-    public List getAlojamientosByClienteAndHotel(Date inicio, Date salida, Cliente cliente, int idHotel) throws Exception {
+    public List getAlojamientosByClienteAndDateAndHotel(Date inicio, Date salida, Cliente cliente, int idHotel) throws Exception {
         if (cliente == null) {
             throw new Exception("No se ha cargado el cliente");
         } else if (inicio == null || salida == null) {
@@ -80,7 +90,7 @@ public class ManejadorAlojamiento {
             Alojamiento aloj = new AlojamientoBuilder().dpiCliente(cliente.getDpi()).builder();
             String consulta = "SELECT * FROM ALOJAMIENTO WHERE FECHA_ENTRADA < '" + fechaFormat.format(salida) + "' && FECHA_SALIDA > '"
                     + fechaFormat.format(inicio) + "' && DPI_CLIENTE = '" + cliente.getDpi() + "' AND ID_HOTEL = ' " + idHotel + " '";
-            return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, aloj, 3);
+            return ManejadorBaseDatos.getInstance().getAlojamientos(consulta, aloj, 0);
         }
     }
 }

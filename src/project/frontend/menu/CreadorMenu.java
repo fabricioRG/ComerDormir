@@ -291,7 +291,6 @@ public class CreadorMenu extends javax.swing.JInternalFrame {
             ManejadorMenu.getInstance().setMenu(textFieldNombre.getText().trim(), textFieldDescripcion.getText().trim(), 
                     (String) comboBoxTipo.getSelectedItem(), formattedTextFieldPrecio.getText(), formattedTextFieldCosto.getText().trim(), restaurante);
             limpiarCampos();
-            buttonRegistrar.setEnabled(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
