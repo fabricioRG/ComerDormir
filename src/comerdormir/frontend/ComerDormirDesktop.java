@@ -72,7 +72,7 @@ public class ComerDormirDesktop extends javax.swing.JFrame {
 
     private Empleado empleado = null;
     private Hotel hotel = null;
-    public static final String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/";
+    public static final String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/";
     public static final String IMAGE_EXTENSION = ".jpg";
     public String path = " ";
     public String path1 = " ";

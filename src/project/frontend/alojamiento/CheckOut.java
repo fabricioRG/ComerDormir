@@ -28,7 +28,7 @@ public class CheckOut extends javax.swing.JInternalFrame {
     private List<Alojamiento> listaAloj = null;
     private ObservableList<Alojamiento> listaAlojamientosObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Hotel hotel;
     private Alojamiento alojamientoSelect = null;
     

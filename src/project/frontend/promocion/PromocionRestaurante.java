@@ -41,7 +41,7 @@ public class PromocionRestaurante extends javax.swing.JInternalFrame {
     private List<Opinion> listaOpinion = null;
     private ObservableList<Opinion> listaOpinionObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Habitacion habitacion;
     private Hotel hotel = null;
     private Restaurante restaurante = null;

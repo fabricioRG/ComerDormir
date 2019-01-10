@@ -26,7 +26,7 @@ public class ReporteEmpleados2 extends javax.swing.JInternalFrame {
     private ObservableList<Empleado> listaEmpleadoObser = null;
     public String path;
     private Hotel hotel = null;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     
     /**
      * Creates new form CreadorUsuario

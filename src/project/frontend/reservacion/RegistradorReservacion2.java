@@ -26,7 +26,7 @@ public class RegistradorReservacion2 extends javax.swing.JInternalFrame {
     private Habitacion habitacionSelec = null;
     private Hotel hotel = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur2.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur2.jpg";
 
     public RegistradorReservacion2(Hotel hotel) {
         this.hotel = hotel;

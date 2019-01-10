@@ -27,7 +27,7 @@ import project.frontend.restaurante.SelectRestaurante;
 public class CreadorEncargadoR extends javax.swing.JInternalFrame {
 
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Restaurante restaurante = null;
     
     /**

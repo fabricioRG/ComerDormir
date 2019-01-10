@@ -35,7 +35,7 @@ public class ReporteAlojamientosFiltrado extends javax.swing.JInternalFrame {
     private ObservableList<Alojamiento> listaAlojamientosObser = null;
     private ObservableList<Consumo> listaConsumosObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private final static String SIN_SELECCIONAR = "Sin Seleccionar";
     private Hotel hotel;
     private Cliente cliente;

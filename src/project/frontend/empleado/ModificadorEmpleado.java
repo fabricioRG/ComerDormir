@@ -29,7 +29,7 @@ public class ModificadorEmpleado extends javax.swing.JInternalFrame {
     private ObservableList<Empleado> listaEmpleadoObser = null;
     private Empleado empleadoSelect = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Empleado empleadoActual = null;
 
     /**

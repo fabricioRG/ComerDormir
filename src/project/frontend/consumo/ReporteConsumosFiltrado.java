@@ -37,7 +37,7 @@ public class ReporteConsumosFiltrado extends javax.swing.JInternalFrame {
     private List<Consumo> listaConsu = null;
     private ObservableList<Consumo> listaConsumosObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Restaurante restaurante;
     private Cliente cliente;
     private Alojamiento alojamientoSelect = null;

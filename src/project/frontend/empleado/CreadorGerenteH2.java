@@ -25,7 +25,7 @@ import project.backend.hotel.ManejadorHotel;
 public class CreadorGerenteH2 extends javax.swing.JInternalFrame {
 
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Hotel hotel = null;
     
     /**

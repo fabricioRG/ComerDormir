@@ -29,7 +29,7 @@ public class RegistradorReservacion extends javax.swing.JInternalFrame {
     private Hotel hotel = null;
     public String path;
     private double nuevoPrecio = 0;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur2.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur2.jpg";
 
     public RegistradorReservacion() {
         this.listaHabit = new LinkedList<>();

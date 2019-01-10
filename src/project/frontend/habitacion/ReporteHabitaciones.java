@@ -26,7 +26,7 @@ public class ReporteHabitaciones extends javax.swing.JInternalFrame {
     private ObservableList<Habitacion> listaHabitObser = null;
     public String path;
     private Habitacion habitacion;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
 
     /**
      * Creates new form CreadorUsuario

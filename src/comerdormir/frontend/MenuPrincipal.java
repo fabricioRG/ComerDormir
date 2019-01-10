@@ -24,8 +24,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     public String path;
     public String path1;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/ComerDormir.jpg";
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH1 = "src/project/frontend/images/ComerDormir2.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/ComerDormir.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH1 ="src/project/frontend/images/ComerDormir2.jpg";
     
     /**
      * Creates new form MenuPrincipal

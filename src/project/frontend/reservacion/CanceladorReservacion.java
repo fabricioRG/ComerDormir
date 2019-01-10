@@ -23,7 +23,7 @@ public class CanceladorReservacion extends javax.swing.JInternalFrame {
     private Reservacion reserSelec = null;
     public String path;
     private Hotel hotel;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur2.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur2.jpg";
 
     public CanceladorReservacion(Hotel hotel) {
         this.hotel = hotel;

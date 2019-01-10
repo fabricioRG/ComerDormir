@@ -17,7 +17,7 @@ public class SolicitadorEmpleado extends javax.swing.JDialog {
     private int areaTrabajo = 0;
     public String path;
     private MenuPrincipal mp = null;
-    public final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur4.jpg";
+    public final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur4.jpg";
 
     /**
      * Creates new form SolicitadorUsuario

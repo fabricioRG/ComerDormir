@@ -31,7 +31,7 @@ public class TomarPedido extends javax.swing.JInternalFrame {
     public String path;
     private Restaurante restaurante;
     private Alojamiento alojamiento;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur3.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur3.jpg";
 
     /**
      * Creates new form CreadorUsuario

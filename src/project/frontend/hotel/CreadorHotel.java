@@ -13,7 +13,7 @@ import project.backend.hotel.ManejadorHotel;
 public class CreadorHotel extends javax.swing.JInternalFrame {
 
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     
     /**
      * Creates new form CreadorUsuario

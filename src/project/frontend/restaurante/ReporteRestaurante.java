@@ -27,7 +27,7 @@ public class ReporteRestaurante extends javax.swing.JInternalFrame {
     private List<Restaurante> listaRest = null;
     private ObservableList<Restaurante> listaRestauObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     
     /**
      * Creates new form CreadorUsuario

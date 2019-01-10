@@ -16,7 +16,7 @@ import project.backend.restaurante.ManejadorRestaurante;
 public class CreadorRestaurante extends javax.swing.JInternalFrame {
 
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Hotel hotel = null;
     
     /**

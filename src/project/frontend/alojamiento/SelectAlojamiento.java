@@ -25,7 +25,7 @@ public class SelectAlojamiento extends javax.swing.JDialog {
     private List<Alojamiento> listaAloj = null;
     private ObservableList<Alojamiento> listaAlojamientosObser = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
     private Alojamiento alojaSelect = null;
     
     /**

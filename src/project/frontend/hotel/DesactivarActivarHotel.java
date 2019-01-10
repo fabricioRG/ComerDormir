@@ -26,7 +26,7 @@ public class DesactivarActivarHotel extends javax.swing.JInternalFrame {
     private ObservableList<Hotel> listaHotelesObser = null;
     private Hotel hotelSelect = null;
     public String path;
-    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH = "src/project/frontend/images/blur1.jpg";
+    private final static String BACKGROUNDD_IMAGE_PARENT_RELATIVE_PATH ="src/project/frontend/images/blur1.jpg";
 
     /**
      * Creates new form CreadorUsuario
